@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1080px;height:1920px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="world">
+<!-- 桌子 + 电脑 + 凳子 -->
+<path id="dsh" d="M470 790 C560 784 680 784 760 790 L756 800 L470 800Z" fill="url(#hatch)" opacity="0" filter="url(#pencil)"/>
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <path class="fl" d="M180 800 C360 796 620 804 860 798" stroke-width="4"/>
+ <path class="dk" d="M436 642 C560 638 680 640 790 644" stroke-width="5"/>
+ <path class="dk" d="M462 644 L456 798 M762 644 L768 798" stroke-width="5"/>
+ <path class="lp" d="M480 636 L704 634 L688 612 L498 614Z" stroke-width="4.5"/>
+ <path class="lp" d="M504 612 L512 468 L690 466 L684 610" stroke-width="5"/>
+ <path class="sl" d="M318 660 C340 656 380 656 404 660 M328 662 L320 798 M394 662 L402 798" stroke-width="5"/>
+</g>
+<path id="scr" d="M516 474 L686 472 L680 604 L510 606Z" fill="url(#hatch)" opacity="0" filter="url(#pencil)"/>
+<g filter="url(#pen)">
+ <text id="ai" x="597" y="572" text-anchor="middle" font-size="80" font-weight="700" fill="#34322E">任务</text>
+</g>
+<!-- 小人 A：坐着打字（髋在 0,0） -->
+<g id="manA" transform="translate(360 652) scale(1.5)"><g id="mA" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2">
+ <path d="M-36 -106 C-30 -140 30 -140 36 -106 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-88" r="36"/>
+ <path d="M0 -94 q5 4 10 0 M20 -94 q5 4 10 0" stroke-width="2.8"/>
+ <path d="M8 -72 q8 6 16 0" stroke-width="2.6"/>
+ <path d="M0 -52 L0 0"/>
+ <g id="arms"><path d="M0 -38 L40 -22 L84 -28 M0 -36 L36 -18 L78 -20"/></g>
+ <path d="M0 0 L40 2 L42 40 M0 0 L34 6 L34 42"/>
+</g></g>
+<!-- 小人 B：转过来比大拇指 -->
+<g id="manB" transform="translate(360 652) scale(1.5)" opacity="0"><g id="mB" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2">
+ <path d="M-36 -106 C-30 -140 30 -140 36 -106 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-88" r="36"/>
+ <path d="M-15 -94 q5 4 10 0 M7 -94 q5 4 10 0" stroke-width="2.8"/>
+ <path d="M-12 -72 q12 12 24 0" stroke-width="2.6"/>
+ <path d="M0 -52 L0 0"/>
+ <path d="M0 -40 L-26 -12"/>
+ <path d="M0 -40 L50 -44 L64 -62"/>
+ <path d="M56 -76 C56 -80 74 -80 76 -76 L76 -64 C74 -60 58 -60 56 -64Z" fill="#F6F3EA"/>
+ <path d="M58 -78 C56 -92 58 -100 64 -100 C70 -100 70 -92 68 -78" fill="#F6F3EA"/>
+ <path d="M76 -72 L72 -72 M76 -67 L72 -67" stroke-width="2"/>
+ <path d="M0 0 L-14 4 L-16 40 M0 0 L14 4 L16 40"/>
+</g></g>
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="3.5">
+ <path class="sp" d="M480 500 l16 -16 M488 530 l22 -2 M452 486 l-2 -22"/>
+</g>
+<g filter="url(#pen)">
+ <text id="lh" x="770" y="470" font-size="100" font-weight="700" fill="#07C160" transform="rotate(-4 770 470)">更顺</text>
+</g>
+<!-- 下半：任务卡 -->
+<g id="cards" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <g class="cd" id="cd1"><path d="M152 966 L298 962 L332 994 L334 1082 L154 1086Z" fill="#F6F3EA" stroke-width="4.5"/><path d="M298 962 L300 996 L332 994" stroke-width="3.5"/><path d="M174 1006 q16 -6 32 0 t32 0 t28 0 M174 1036 q16 -6 32 0 t32 0 t32 0 t28 0 M174 1062 q14 -5 28 0 t28 0" stroke="#6B675E" stroke-width="3"/></g>
+ <g class="cd" id="cd2"><path d="M152 1131 L298 1127 L332 1159 L334 1247 L154 1251Z" fill="#F6F3EA" stroke-width="4.5"/><path d="M298 1127 L300 1161 L332 1159" stroke-width="3.5"/><path d="M174 1171 q16 -6 32 0 t32 0 t28 0 M174 1201 q16 -6 32 0 t32 0 t32 0 t28 0 M174 1227 q14 -5 28 0 t28 0" stroke="#6B675E" stroke-width="3"/></g>
+ <g class="cd" id="cd3"><path d="M152 1296 L298 1292 L332 1324 L334 1412 L154 1416Z" fill="#F6F3EA" stroke-width="4.5"/><path d="M298 1292 L300 1326 L332 1324" stroke-width="3.5"/><path d="M174 1336 q16 -6 32 0 t32 0 t28 0 M174 1366 q16 -6 32 0 t32 0 t32 0 t28 0 M174 1392 q14 -5 28 0 t28 0" stroke="#6B675E" stroke-width="3"/></g>
+</g>
+<!-- 创作者 -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+ <g class="fc" id="fc1"><circle cx="830" cy="1012" r="50"/><path d="M810 1008 q5 4 10 0 M840 1008 q5 4 10 0 M814 1034 q16 10 32 0" stroke-width="3.5"/><path d="M790 984 l8 -26 l12 18 l10 -26 l12 22 l12 -24 l10 26 l14 -14" stroke-width="3.5"/><path d="M778 1100 C784 1072 876 1072 882 1100" /></g>
+ <g class="fc" id="fc2"><circle cx="830" cy="1177" r="50"/><path d="M810 1176 q5 4 10 0 M840 1176 q5 4 10 0 M816 1198 q14 8 28 0" stroke-width="3.5"/><path d="M782 1166 C786 1120 874 1116 878 1166 C850 1150 820 1150 782 1166Z" fill="url(#hatch)" stroke-width="3.5"/><path d="M778 1265 C784 1237 876 1237 882 1265"/></g>
+ <g class="fc" id="fc3"><circle cx="830" cy="1342" r="50"/><path d="M810 1338 q5 4 10 0 M840 1338 q5 4 10 0 M816 1362 q14 8 28 0" stroke-width="3.5"/><circle cx="830" cy="1280" r="16" fill="url(#hatch)" stroke-width="3.5"/><path d="M778 1430 C784 1402 876 1402 882 1430"/></g>
+</g>
+<!-- 连线 -->
+<g fill="none" stroke="#07C160" stroke-linecap="round" stroke-width="6" filter="url(#pen)">
+ <path class="ln1" d="M346 1026 C460 990 560 1060 660 1020 C700 1006 740 1010 766 1014"/>
+ <path class="ln2" d="M346 1192 C450 1150 560 1226 660 1184 C700 1170 740 1176 766 1180"/>
+ <path class="ln3" d="M346 1356 C460 1318 560 1392 660 1350 C700 1336 740 1342 766 1344"/>
+</g>
+</g></svg>
+<script>
+var D=6.8; SK.page(document.getElementById('sv'));
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:560,cy:590,s:1.15});
+SK.draw(tl,'.fl',0.0,0.4); SK.draw(tl,'.dk',0.1,0.35,0.1); SK.draw(tl,'.sl',0.15,0.35);
+SK.draw(tl,'.lp',0.3,0.35,0.15); SK.show(tl,'#scr',0.75,0.2,.25); SK.show(tl,'#dsh',0.6,0.2,.5);
+SK.pop(tl,'#mA',0.25);
+SK.write(tl,'#ai',0.85,0.35);
+// 打字
+tl.to('#arms',{y:-4,duration:.1,yoyo:true,repeat:9,ease:'steps(1)'},1.0);
+// 2.2 转身比大拇指
+tl.set('#manA',{opacity:0},2.1); tl.set('#manB',{opacity:1},2.1);
+tl.fromTo('#mB',{scale:.85,transformOrigin:'50% 100%'},{scale:1,duration:.3,ease:'back.out(3)'},2.1);
+SK.draw(tl,'.sp',2.3,0.15);
+SK.write(tl,'#lh',2.3,0.45);
+tl.to('#mB',{rotation:-5,transformOrigin:'50% 100%',duration:.15,yoyo:true,repeat:3,ease:'steps(2)'},3.4);
+// 5.2 拉开到下半
+cam.to({cx:540,cy:900,s:1.0},0.6,'power2.inOut',4.65);
+SK.drop(tl,'#cd1',4.95,-3); SK.drop(tl,'#cd2',5.05,2); SK.drop(tl,'#cd3',5.15,-2);
+SK.pop(tl,'#fc1',5.0); SK.pop(tl,'#fc2',5.1); SK.pop(tl,'#fc3',5.2);
+SK.draw(tl,'.ln1',5.25,0.25); SK.draw(tl,'.ln2',5.65,0.25); SK.draw(tl,'.ln3',6.05,0.25);
+SK.mount(tl,D);
+</script></body></html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1440, height=1080" />
+<!-- 铅笔素描本 · 参考镜头：边讲边画——手册一笔笔画出来，镜头跟着笔走，最后拉远看全图。6 s。 -->
+<script src="assets/gsap.min.js"></script>
+<script src="kit/house.js"></script>
+<link rel="stylesheet" href="kit/house.css" />
+<style> #root { background:#F6F3EA; } </style>
+</head>
+<body>
+<div id="root" data-composition-id="sketch-notebook" data-start="0" data-width="1440" data-height="1080" data-duration="6" data-fps="30">
+<div id="world" class="world">
+<svg id="sv" class="full" width="1440" height="1080" viewBox="0 0 1440 1080">
+<defs></defs>
+<rect x="-300" y="-300" width="2040" height="1680" fill="url(#grid)"/>
+<rect x="-300" y="-300" width="2040" height="1680" filter="url(#paper)"/>
+<g fill="none" stroke="#9A968C" stroke-width="5">
+ <path d="M0 120 q34 -10 34 20 q0 26 -34 18"/><path d="M0 300 q34 -10 34 20 q0 26 -34 18"/><path d="M0 480 q34 -10 34 20 q0 26 -34 18"/><path d="M0 660 q34 -10 34 20 q0 26 -34 18"/><path d="M0 840 q34 -10 34 20 q0 26 -34 18"/>
+</g>
+<!-- task sticky -->
+<g id="note"><g transform="rotate(-7 210 220)">
+ <rect x="84" y="156" width="270" height="150" fill="#000" opacity=".08"/><rect x="80" y="150" width="270" height="150" fill="#FBF6DC" stroke="#CFC6A0" stroke-width="1.5"/>
+ <rect x="170" y="134" width="96" height="30" fill="#E8E1CC" opacity=".8"/>
+ <text x="104" y="210" font-family="Hannotate SC" font-size="26" fill="#6B675E">任务内容</text>
+ <text x="104" y="260" font-family="Hannotate SC" font-size="32" font-weight="700" fill="#34322E">整理一份项目计划</text>
+</g></g>
+<!-- graphite: main pass (class b = book, c = character, a = arm) -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <path class="b" d="M300 360 L640 330 L660 760 L330 800Z" stroke-width="4"/>
+ <path class="b" d="M640 330 L980 370 L960 800 L660 760" stroke-width="4"/>
+ <path class="b" d="M650 334 L664 768" stroke-width="5"/>
+ <path class="b" d="M330 800 L336 818 L662 780 L960 820 L960 800" stroke-width="3"/>
+ <path id="hatchB" d="M336 822 L960 830 L940 850 L360 846Z" fill="url(#hatch)" stroke="none" opacity=".7"/>
+ <rect class="b" x="370" y="520" width="220" height="140" stroke-width="3" transform="rotate(-4 480 590)"/>
+ <path class="b" d="M400 640 l50 -60 l40 36 l40 -50 l50 70" stroke-width="3" transform="rotate(-4 480 590)"/>
+ <path class="t" d="M980 400 L1036 404 L1032 458 L976 456" stroke-width="3"/>
+ <path class="t" d="M974 470 L1060 476 L1054 540 L970 536" stroke-width="3"/>
+ <path class="t" d="M970 552 L1030 556 L1026 608 L966 606" stroke-width="3"/>
+ <path class="c" d="M1180 900 C1170 760 1180 640 1250 600 C1320 580 1380 640 1390 900" stroke-width="4"/>
+ <g id="head" transform="rotate(-12 1262 560)">
+  <ellipse class="c" cx="1262" cy="500" rx="76" ry="84" stroke-width="4"/>
+  <path class="c" d="M1186 500 C1176 400 1250 390 1290 404 C1350 420 1350 480 1342 520 C1330 470 1290 450 1250 456 C1220 460 1200 480 1196 540" stroke-width="4"/>
+  <path id="hair" d="M1186 500 C1176 400 1250 390 1290 404 C1350 420 1350 480 1342 520 C1330 470 1290 450 1250 456 C1220 460 1200 480 1196 540" stroke="none" fill="url(#hatch)"/>
+  <path class="c" d="M1226 510 q6 -4 12 0 M1276 506 q6 -4 12 0" stroke-width="4"/>
+  <path class="c" d="M1246 548 q14 10 28 0" stroke-width="3.5"/>
+ </g>
+ <path class="c" d="M1230 600 L1262 680 L1300 596" stroke-width="3"/>
+ <rect class="c" x="1232" y="680" width="64" height="74" stroke-width="3" transform="rotate(-6 1264 717)"/>
+ <path class="a" d="M1200 660 C1120 640 1060 560 990 520" stroke-width="4"/>
+ <path class="a" d="M1220 700 C1130 690 1060 600 1000 556" stroke-width="4"/>
+ <path class="a" d="M990 520 C970 512 960 530 972 544 L1000 556" stroke-width="4"/>
+ <path class="a" d="M974 528 L896 502" stroke-width="5"/>
+</g>
+<!-- graphite: second, lighter pass (sketchy double line) -->
+<g id="pass2" filter="url(#pencil2)" fill="none" stroke="#3E3C38" stroke-linecap="round" opacity="0" transform="translate(2.5 -1.5)">
+ <path d="M300 360 L640 330 L660 760 L330 800Z" stroke-width="2"/><path d="M640 330 L980 370 L960 800 L660 760" stroke-width="2"/>
+ <path d="M1180 900 C1170 760 1180 640 1250 600 C1320 580 1380 640 1390 900" stroke-width="2"/>
+ <ellipse cx="1262" cy="500" rx="76" ry="84" stroke-width="2" transform="rotate(-12 1262 560)"/>
+ <path d="M1200 660 C1120 640 1060 560 990 520" stroke-width="2"/>
+</g>
+<!-- handwriting -->
+<g font-family="Hannotate SC" fill="#34322E" filter="url(#pen)">
+ <text class="hw1" x="350" y="430" font-size="44" font-weight="700" transform="rotate(-5 350 430)">任务怎么推进</text>
+ <text class="hw1" x="356" y="476" font-size="24" fill="#6B675E" transform="rotate(-5 356 476)">步骤与检查</text>
+ <g font-size="28" transform="rotate(5 700 400)">
+  <text class="hw2" x="700" y="420">1. 先明确目标</text>
+  <text class="hw2" x="700" y="490">2. 列出所需素材</text>
+  <text class="hw2" x="700" y="560">3. 安排执行顺序</text>
+  <text class="hw2" x="700" y="630">4. 完成后逐项检查</text>
+ </g>
+ <text class="hw3" x="988" y="440" font-size="20" transform="rotate(4 988 440)">脚本</text>
+ <text class="hw3" x="982" y="516" font-size="24" font-weight="700" transform="rotate(4 982 516)">项目计划</text>
+ <text class="hw3" x="978" y="590" font-size="20" transform="rotate(4 978 590)">剪辑</text>
+ <text class="hw4" x="1240" y="728" font-size="22" transform="rotate(-6 1264 717)">协作者</text>
+</g>
+<!-- blue ballpoint -->
+<g fill="none" stroke="#2448C9" stroke-linecap="round" stroke-width="4" filter="url(#pen)">
+ <ellipse class="bp" cx="830" cy="488" rx="150" ry="30" transform="rotate(5 830 488)"/>
+ <ellipse class="bp" cx="834" cy="486" rx="156" ry="27" transform="rotate(3 830 488)" stroke-width="2.5"/>
+ <path class="tick" d="M686 404 l10 12 l20 -26" stroke-width="5"/>
+ <path class="ar" d="M760 180 C820 230 850 300 838 440"/>
+ <path class="ar" d="M822 420 L838 446 L856 422"/>
+</g>
+<g font-family="Hannotate SC" fill="#2448C9" filter="url(#pen)">
+ <text class="hw5" x="560" y="150" font-size="54" font-weight="700">Skill ＝ 工作手册</text>
+ <text class="hw5" x="880" y="250" font-size="30">开始前，先看清步骤</text>
+</g>
+<circle cx="1260" cy="190" r="74" fill="none" stroke="#B9A27A" stroke-width="6" opacity=".25"/>
+</svg>
+</div>
+</div>
+<script>
+  var D = 6;
+  House.defs(document.getElementById("sv"), "sketch");
+  var tl = gsap.timeline({ paused: true });
+  var cam = House.cam(tl, "#world", { cx: 640, cy: 560, s: 1.18 });
+  // camera follows the pencil: book -> character -> pull back to see the whole page
+  cam.to({ cx: 1000, cy: 590, s: 1.22 }, 0.8, "power2.inOut", 2.3);
+  cam.to({ cx: 720, cy: 500, s: 1.0 }, 1.3, "power2.inOut", 4.1);
+
+  House.boil(tl, ["pencil", "pen"], D);            // lines shimmer on twos, like real pencil
+  House.slap(tl, "#note", 0.1, { rot: -8, y: -30 });
+  House.draw(tl, "#sv .b", 0.2, 0.22);
+  tl.fromTo("#hatchB", { opacity: 0 }, { opacity: 0.7, duration: 0.3, ease: House.twos("none", 0.3) }, 1.3);
+  House.wipe(tl, ".hw1", 0.9, 0.35, { stagger: 0.2 });
+  House.wipe(tl, ".hw2", 1.45, 0.3, { stagger: 0.18 });
+  House.draw(tl, "#sv .t", 2.05, 0.12);
+  House.wipe(tl, ".hw3", 2.2, 0.2, { stagger: 0.1 });
+  House.draw(tl, "#sv .c", 2.45, 0.16);
+  tl.fromTo("#hair", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: House.twos("none", 0.25) }, 3.2);
+  House.wipe(tl, ".hw4", 3.3, 0.2);
+  House.draw(tl, "#sv .a", 3.35, 0.14);
+  tl.fromTo("#pass2", { opacity: 0 }, { opacity: 0.45, duration: 0.4, ease: House.twos("none", 0.4) }, 3.3);
+  House.draw(tl, ".bp", 3.85, 0.3);
+  House.draw(tl, ".tick", 4.4, 0.15);
+  House.draw(tl, ".ar", 4.6, 0.25);
+  House.wipe(tl, ".hw5", 4.7, 0.5, { stagger: 0.3 });
+  tl.to({}, { duration: D }, 0);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["sketch-notebook"] = tl;
+</script>
+</body>
+</html>

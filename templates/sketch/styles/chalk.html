@@ -1,0 +1,71 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- 画风对照镜头（4:3 横屏 1440×1080，8 s）。五种画风同一个剧本，只有下面 STYLE 这一行不同。
+     写新镜头时：抄这个文件，改 STYLE，画面一律用 SK.shape / SK.line / SK.text / LDD.create 画，颜色从 SK.C 取，
+     这样换画风只改一行。画风说明见 references/sketch-styles.md -->
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script><script src="kit/stick.js"></script>
+<style>*{margin:0}body{width:1440px;height:1080px;overflow:hidden}</style></head><body>
+<svg id="sv" width="1440" height="1080" viewBox="0 0 1440 1080"><g id="world"><g id="stage"></g><g id="actors"></g></g></svg>
+<script>
+var STYLE='chalk';
+var D=8.0, sv=document.getElementById('sv'); SK.page(sv,{style:STYLE});
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:720,cy:540,s:1});
+var st=document.getElementById('stage'), C=SK.C, c=function(i){return C[i%C.length]};
+
+// 标题：中文字等宽，按字数算下划线位置（不依赖字体是否加载完）
+var FS=64, tx=120, ty=170;
+SK.text(st,tx,ty,'交代任务前，先写清',{size:FS,id:'t1'});
+SK.text(st,tx+FS*9,ty,'标准',{size:FS,id:'t2',color:SK.ST.fill==='solid'?C[1%C.length]:SK.INK});
+SK.line(st,'M'+(tx+FS*9-6)+' '+(ty+36)+' C'+(tx+FS*9+40)+' '+(ty+42)+' '+(tx+FS*11-30)+' '+(ty+30)+' '+(tx+FS*11+8)+' '+(ty+38),{color:SK.G,lw:SK.ST.lw+1,id:'ul'});
+
+// 任务卡
+var card=SK.shape(st,SK.rr(640,280,640,480,30),{shadow:true,fill:SK.ST.name==='手账平涂'?'#FFFFFF':null,id:'card'});
+var rows=['要几张图','什么尺寸','几点前交'], dots=[], words=[], checks=[];
+rows.forEach(function(r,i){var y=410+i*120;
+  dots.push(SK.shape(st,SK.circ(712,y-16,22),{fill:c(i+ (C.length>2?0:0)),lw:SK.ST.lw-1}));
+  words.push(SK.text(st,766,y,r,{size:52,id:'w'+i}));
+  checks.push(SK.line(st,'M1130 '+(y-22)+' L1152 '+(y)+' L1196 '+(y-50),{color:SK.G,lw:SK.ST.lw+3,cls:'ck'}));
+});
+// 箭头 → 交付的文件
+SK.line(st,'M1020 784 C1030 850 1070 880 1122 882',{id:'arr'}); SK.line(st,'M1100 860 L1126 882 L1098 902',{id:'arh'});
+var doc=SK.shape(st,'M1150 800 H1270 L1310 840 V960 H1150 Z',{fill:c(3),shadow:true,id:'doc'});
+SK.line(st,'M1270 800 V840 H1310',{id:'fold',lw:SK.ST.lw-1});
+SK.text(st,1230,1028,'交付',{size:44,anchor:'middle',id:'dt'});
+
+// 人物：画风自己决定线身体还是色块身体
+var me=LDD.create('#actors',{id:'me',x:430,y:770,legs:true,color:c(2)});
+var S=me.s; S.R={x:70,y:20}; S.L={x:-70,y:20};
+
+// ── 时间线 ──
+SK.write(tl,'#t1',.15,.8); SK.write(tl,'#t2',.95,.25);
+SK.pop(tl,'#me',.25);
+SK.draw(tl,'#card .ol',.9,.7); SK.fillIn(tl,[card.shadow,card.fill],1.2);
+tl.to(S,{lx:.9,ly:-.2,duration:.3},1.0);
+rows.forEach(function(r,i){var t=1.6+i*.6;
+  SK.draw(tl,dots[i].ol,t,.2); SK.fillIn(tl,dots[i].fill,t+.15);
+  SK.write(tl,'#w'+i,t+.1,.4);
+  tl.to(S.R,{x:190,y:-250+i*70,duration:.35,ease:'power2.out'},t-.05);
+  tl.to(S,{lean:4,ly:-.3+i*.35,duration:.3},t);
+});
+tl.to(S,{mo:1,duration:.12,repeat:9,yoyo:true,ease:'steps(1)'},1.4);
+tl.to(S,{mo:0,duration:.01},3.6);
+SK.draw(tl,'.ck',3.5,.28); tl.set(S,{},3.5);
+checks.forEach(function(k,i){tl.fromTo(k,{opacity:0},{opacity:1,duration:.01},3.5+i*.0);});
+tl.to(S.R,{x:70,y:20,duration:.45,ease:'power2.inOut'},3.6);
+tl.to(S,{lean:0,lx:0,ly:0,duration:.4},3.7);
+tl.to(S,{happy:1,duration:.01},4.25); tl.to(S,{hop:-22,duration:.16,yoyo:true,repeat:1,ease:'power2.out'},4.25);
+// 跳的时候手跟着身体一起起来（手的目标点是固定在画面里的，不跟着动胳膊会被拉直）
+[S.L,S.R].forEach(function(h){tl.to(h,{y:'-=22',duration:.16,yoyo:true,repeat:1,ease:'power2.out'},4.25);});
+tl.to(S,{happy:0,duration:.01},5.1);
+SK.draw(tl,'#ul',4.5,.4);
+cam.to({cx:860,cy:560,s:1.07},1.0,'power2.inOut',4.5);
+SK.draw(tl,'#arr',5.2,.4); SK.draw(tl,'#arh',5.55,.15);
+SK.draw(tl,'#doc .ol',5.6,.45); SK.fillIn(tl,[doc.shadow,doc.fill],5.9); SK.draw(tl,'#fold',5.95,.2);
+SK.write(tl,'#dt',6.1,.35);
+tl.to(S,{lx:1,ly:.5,duration:.3},5.5); tl.to(S.L,{x:-60,y:-40,duration:.4},5.6);
+tl.to(S.L,{x:-70,y:20,duration:.5},6.9);
+cam.to({cx:720,cy:540,s:1},1.0,'power2.inOut',6.6);
+tl.to(S,{lx:0,ly:0,mo:3,duration:.3},7.0);
+SK.mount(tl,D);
+var _r=window.render; window.render=function(t){_r(t); me.draw(t);}; window.render(0);
+</script></body></html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1440, height=1080" />
+<!-- 资料拼贴 · 参考镜头：桌上一张打印出来的文件 + 真截图冲印件，荧光笔划重点，红笔圈出来。6 s。
+     真截图放 assets/shots/shot.png（先去标识，见 edit-rules.md）。 -->
+<script src="assets/gsap.min.js"></script>
+<script src="kit/house.js"></script>
+<link rel="stylesheet" href="kit/house.css" />
+<style>
+  #root { background: #1B1B1A; }
+  #desk { position:absolute; left:-300px; top:-300px; width:2040px; height:1680px; background: radial-gradient(ellipse at 45% 45%, #2B2A27 0%, #1B1B1A 55%, #0E0E0D 100%); }
+  .abs { position:absolute; }
+  .paper { background:#ECE7DC; box-shadow:0 18px 40px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.4); }
+  #doc { left:250px; top:120px; width:640px; height:780px; padding:56px 60px; box-sizing:border-box; font:400 25px/1.75 "SF Mono","Menlo","PingFang SC"; color:#1d1d1b; }
+  #doc .h1 { font:700 40px/1.3 "SF Mono","PingFang SC"; margin-bottom:18px; }
+  #doc .h2 { font:700 29px/1.5 "SF Mono","PingFang SC"; margin:26px 0 10px; }
+  #doc .dim { color:#77736a; }
+  #doc .ln { white-space:nowrap; }
+  .hlw { position:relative; display:inline-block; }
+  .hlw i { position:absolute; left:-4px; right:-4px; top:12%; bottom:12%; background:#F7D84A; z-index:0; }
+  .hlw span { position:relative; z-index:1; }
+  #doc .fold { position:absolute; left:0; right:0; top:330px; height:2px; background:rgba(0,0,0,.08); box-shadow:0 1px 0 rgba(255,255,255,.5); }
+  #photo { left:860px; top:560px; width:520px; padding:16px 16px 54px; background:#F2EEE6; box-sizing:border-box; }
+  #photo .img { width:488px; height:252px; background:#9a9a9a url(../assets/shots/shot.png) center/cover; filter:grayscale(1) contrast(1.35) brightness(1.05); position:relative; overflow:hidden; }
+  #photo .img:after { content:""; position:absolute; inset:0; background:radial-gradient(circle,#000 0.9px,transparent 1.4px) 0 0/4px 4px; opacity:.28; mix-blend-mode:multiply; }
+  #photo .cap { position:absolute; left:18px; bottom:14px; font:500 22px "PingFang SC"; color:#3a3833; }
+  #tape { left:180px; top:70px; white-space:nowrap; background:#D7301F; color:#F4EFE6; font:400 68px/1 "YouSheBiaoTiHei"; padding:16px 34px 12px;
+    clip-path:polygon(0 6%,3% 0,97% 4%,100% 0,99% 92%,96% 100%,4% 96%,0 100%); text-shadow:-1.5px 0 rgba(0,255,255,.35), 1.5px 0 rgba(255,0,60,.35); }
+  #task { left:930px; top:120px; white-space:nowrap; background:#E4DCCB; padding:18px 26px; font:600 28px/1.4 "PingFang SC"; color:#1d1d1b;
+    clip-path:polygon(0 0,100% 3%,98% 30%,100% 62%,97% 100%,2% 96%,0 60%,2% 28%); }
+  #task small { display:block; font:500 20px "PingFang SC"; color:#6a655b; letter-spacing:2px; }
+  #ink { position:absolute; left:0; top:0; overflow:visible; }
+  #grain { opacity:.22; mix-blend-mode:overlay; pointer-events:none; }
+  #vig { background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%); pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="dossier-doc" data-start="0" data-width="1440" data-height="1080" data-duration="6" data-fps="30">
+<div id="world" class="world">
+  <div id="desk"></div>
+  <div id="docw" class="full"><div id="doc" class="abs paper" style="transform:rotate(-2.2deg)"><div class="fold"></div>
+    <div class="h1 ln"># 项目流程 · CHECKLIST.md</div>
+    <div class="dim ln">先写清目标，再按步骤完成。</div>
+    <div class="h2 ln">## 执行步骤</div>
+    <div class="ln">1. 明确目标与范围</div>
+    <div class="ln">2. <span class="hlw"><i id="hl"></i><span>先确认样张，再批量制作</span></span></div>
+    <div class="ln">3. 设定时间与交付格式</div>
+    <div class="ln">4. 完成后逐项检查</div>
+    <div class="h2 ln">## 最后确认</div>
+    <div class="dim ln">- 所有内容均已核对</div>
+    <div class="dim ln">- 文件完整、名称清楚</div>
+  </div></div>
+  <div id="photow" class="full"><div id="photo" class="abs paper" style="transform:rotate(3.5deg)"><div class="img"></div><div class="cap">逐项检查后再交付</div></div></div>
+  <div id="taskw" class="full"><div id="task" class="abs" style="transform:rotate(-3deg)"><small>收到的任务</small>整理一份项目计划</div></div>
+  <svg id="ink" width="1440" height="1080">
+    <defs></defs>
+    <g id="circG"><path id="circ" d="M318 498 C330 455 560 440 720 452 C800 458 812 500 760 520 C640 556 380 548 330 528 C300 512 312 488 360 474" fill="none" stroke="#D7301F" stroke-width="6" stroke-linecap="round" filter="url(#rough)"/></g>
+    <g id="arwG"><path class="arw" d="M1000 560 C980 500 900 480 806 486" fill="none" stroke="#D7301F" stroke-width="6" stroke-linecap="round" filter="url(#rough)"/>
+    <path class="arw" d="M818 470 L796 489 L822 504" fill="none" stroke="#D7301F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)"/></g>
+  </svg>
+  <div id="tapew" class="full"><div id="tape" class="abs" style="transform:rotate(-5deg)">清单＝工作手册</div></div>
+</div>
+<svg id="grain" class="full" width="1440" height="1080" style="position:absolute"><defs><filter id="gn" filterUnits="userSpaceOnUse" x="0" y="0" width="1440" height="1080"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="9"/><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="1440" height="1080" filter="url(#gn)"/></svg>
+<div id="vig" class="full" style="position:absolute"></div>
+</div>
+<script>
+  var D = 6;
+  House.defs(document.getElementById("ink"), "dossier");
+  // Pen marks are positioned from the real text box, never eyeballed (fonts differ between machines).
+  var r = document.querySelector(".hlw").getBoundingClientRect();
+  var dx = (r.left + r.width / 2) - 555, dy = (r.top + r.height / 2) - 497;
+  document.getElementById("circG").setAttribute("transform", "translate(" + dx + " " + dy + ") scale(" + (r.width + 120) / 500 + " 1)");
+  document.getElementById("circG").setAttribute("transform-origin", "555 497");
+  document.getElementById("arwG").setAttribute("transform", "translate(" + Math.max(0, r.right - 760) + " " + dy + ")");
+  var tl = gsap.timeline({ paused: true });
+  var cam = House.cam(tl, "#world", { cx: 1060, cy: 190, s: 1.5 });
+  // camera: start on the task slip, pan across the desk to the document, hold, then a slow push onto the circled rule
+  cam.to({ cx: 720, cy: 500, s: 1.0 }, 0.85, "power2.inOut", 0.75);
+  cam.to({ cx: 600, cy: 500, s: 1.32 }, 1.2, "sine.inOut", 4.4);
+
+  House.boil(tl, ["gn"], D);                 // film grain crawls
+  House.slap(tl, "#taskw", 0.1, { rot: -6, y: -30 });
+  // document slides in and settles
+  tl.fromTo("#docw", { y: 700, rotation: 7, transformOrigin: "570px 510px" }, { y: 0, rotation: 0, duration: 0.5, ease: House.twos("power3.out", 0.5) }, 0.85);
+  House.wipe(tl, "#doc .ln", 1.25, 0.2, { stagger: 0.07 });
+  // highlighter, then the red pen circle
+  tl.fromTo("#hl", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.42, ease: House.twos("power1.inOut", 0.42) }, 2.2);
+  House.draw(tl, "#circ", 2.75, 0.5);
+  // the real screenshot drops in as a print, arrow ties it to the rule
+  House.slap(tl, "#photow", 3.2, { rot: 8, y: 80 });
+  House.draw(tl, ".arw", 3.75, 0.25);
+  // the claim lands last, like tape slapped on
+  House.slap(tl, "#tapew", 4.15, { rot: -10, y: -40 });
+  tl.to({}, { duration: D }, 0);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["dossier-doc"] = tl;
+</script>
+</body>
+</html>

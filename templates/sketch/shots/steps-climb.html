@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1080px;height:1920px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="world">
+<g id="title" filter="url(#pen)">
+ <text class="t1" x="120" y="330" font-size="92" font-weight="700" fill="#34322E" transform="rotate(-3 120 330)">任务太大，</text>
+ <text class="t1" x="120" y="450" font-size="92" font-weight="700" fill="#34322E" transform="rotate(-3 120 450)">先<tspan fill="#07C160">拆开</tspan>做</text>
+</g>
+<path class="ul" d="M216 480 C280 472 340 468 404 462" fill="none" stroke="#07C160" stroke-width="6" stroke-linecap="round" filter="url(#pen)"/>
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <path class="gr" d="M90 1392 C300 1388 700 1396 1000 1390" stroke-width="4"/>
+ <path class="wall" d="M190 1390 L196 860 L330 856 L326 1392" stroke-width="5"/>
+ <path class="brick" d="M194 940 L328 936 M194 1030 L328 1026 M195 1120 L327 1118 M196 1210 L327 1208 M196 1300 L326 1298" stroke-width="3"/>
+ <path class="brick" d="M262 860 L260 938 M228 938 L228 1028 M296 938 L296 1028 M262 1028 L262 1120 M228 1120 L228 1208 M296 1120 L296 1208 M262 1208 L262 1298 M228 1298 L228 1390 M296 1298 L296 1390" stroke-width="2.6"/>
+ <path class="st1" d="M326 1260 L520 1260" stroke-width="5"/>
+ <path class="st2" d="M520 1260 L520 1140 L720 1140" stroke-width="5"/>
+ <path class="st3" d="M720 1140 L720 940 L960 940 L960 1392" stroke-width="5"/>
+</g>
+<path id="wh" d="M196 862 L232 860 L230 1390 L192 1390Z" fill="url(#hatch)" opacity="0" filter="url(#pencil)"/>
+<path id="gh" d="M722 944 L958 944 L958 1388 L722 1388Z" fill="url(#ghatch)" opacity="0" filter="url(#pencil)"/>
+<!-- 姿势 A：扒墙 -->
+<g id="hang" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="4">
+ <path d="M178 800 C184 766 244 766 250 800 Z" fill="#07C160" stroke="none"/>
+ <circle cx="214" cy="818" r="38"/>
+ <path d="M198 814 q5 -4 10 0 M222 812 q5 -4 10 0" stroke-width="3.5"/>
+ <path d="M204 836 q10 -6 20 0" stroke-width="3"/>
+ <path d="M186 846 C176 880 172 920 170 960"/>
+ <path d="M190 852 C196 846 206 846 214 856 M236 846 C246 842 256 846 262 858"/>
+ <path d="M170 960 C162 990 158 1010 150 1030 M172 960 C182 984 186 1000 182 1024"/>
+</g>
+<!-- 姿势 B：站着（脚在 0,0） -->
+<g id="walker"><g id="stand" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="4">
+ <path d="M-36 -146 C-30 -180 30 -180 36 -146 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-128" r="36"/>
+ <path d="M-15 -132 q5 4 10 0 M7 -132 q5 4 10 0" stroke-width="3.5"/>
+ <path d="M-10 -112 q10 8 20 0" stroke-width="3"/>
+ <path d="M0 -92 L0 -40"/>
+ <path d="M0 -78 L-30 -96 M0 -78 L30 -96"/>
+ <path d="M0 -40 L-18 0 M0 -40 L18 0"/>
+</g></g>
+<g filter="url(#pen)">
+ <text id="l0" x="196" y="1460" font-size="44" font-weight="700" fill="#34322E">起点</text>
+ <text id="l2" x="742" y="630" font-size="34" fill="#6B675E" transform="rotate(-3 742 630)">下一步</text>
+ <text id="n2" x="742" y="730" font-size="88" font-weight="700" fill="#07C160" transform="rotate(-3 742 730)">继续走</text>
+ <text id="l3" x="520" y="1480" font-size="40" fill="#6B675E" transform="rotate(-2 520 1480)">逐步完成</text>
+</g>
+<g fill="none" stroke="#07C160" stroke-linecap="round" filter="url(#pen)">
+ <ellipse class="c1" cx="846" cy="700" rx="136" ry="60" transform="rotate(-3 846 700)" stroke-width="5"/>
+ <ellipse class="c1" cx="850" cy="698" rx="142" ry="56" transform="rotate(-6 846 700)" stroke-width="2.5"/>
+ <path class="c2" d="M524 1506 C600 1496 680 1500 770 1490" stroke-width="5"/>
+</g>
+</g></svg>
+<script>
+var D=6.3; SK.page(document.getElementById('sv'));
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:420,cy:820,s:1.22});
+SK.write(tl,'.t1',0.05,0.45,0.3);
+SK.draw(tl,'.ul',0.7,0.25);
+SK.draw(tl,'.gr',0.2,0.4); SK.draw(tl,'.wall',0.3,0.45); SK.draw(tl,'.brick',0.55,0.3,0.06);
+SK.show(tl,'#wh',0.75,0.25,.55);
+SK.show(tl,'#hang',0.55,0.2); SK.write(tl,'#l0',0.8,0.3);
+tl.set('#hang',{opacity:0},1.15);
+tl.set('#walker',{x:262,y:858,opacity:0},0); tl.set('#walker',{opacity:1},1.15);
+tl.fromTo('#stand',{y:30},{y:0,duration:.3,ease:'back.out(2)'},1.15);
+cam.to({cx:560,cy:1020,s:1.08},0.8,'power2.inOut',1.4);
+SK.draw(tl,'.st1',1.55,0.3);
+tl.to('#walker',{keyframes:[{x:340,y:780,duration:.22,ease:'power1.out'},{x:420,y:1260,duration:.3,ease:'power2.in'}]},1.75);
+SK.draw(tl,'.st2',2.2,0.35); SK.draw(tl,'.st3',2.5,0.45);
+cam.to({cx:560,cy:960,s:1.0},1.0,'power2.inOut',2.3);
+tl.to('#walker',{keyframes:[{x:560,y:1110,duration:.22,ease:'power1.out'},{x:620,y:1140,duration:.2,ease:'power2.in'}]},2.75);
+tl.to('#walker',{keyframes:[{x:740,y:900,duration:.25,ease:'power1.out'},{x:840,y:940,duration:.22,ease:'power2.in'}]},3.3);
+SK.show(tl,'#gh',3.6,0.3,.75);
+SK.write(tl,'#l2',3.6,0.3);
+SK.write(tl,'#n2',3.95,0.4); SK.draw(tl,'.c1',4.35,0.3,0.12);
+SK.write(tl,'#l3',4.6,0.4); SK.draw(tl,'.c2',5.0,0.3);
+tl.to('#stand',{rotation:-8,transformOrigin:'0 0',duration:.15,yoyo:true,repeat:3,ease:'steps(2)'},4.5);
+SK.mount(tl,D);
+</script></body></html>

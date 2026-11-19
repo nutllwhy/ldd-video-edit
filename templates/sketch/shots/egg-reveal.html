@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1080px;height:1920px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="world">
+<!-- 彩蛋 -->
+<g id="egg">
+ <g id="eggBot">
+  <path d="M206 500 C214 572 254 606 300 606 C352 606 392 570 398 500 L370 478 L344 508 L316 476 L288 510 L258 478 L230 506Z" fill="url(#hatch)" opacity=".28" filter="url(#pencil)"/>
+  <g fill="#07C160" filter="url(#pencil)">
+   <circle cx="248" cy="548" r="13"/><circle cx="318" cy="574" r="10"/><circle cx="360" cy="530" r="12"/>
+  </g>
+  <g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+   <path class="eggB" d="M196 470 C196 560 240 606 300 606 C362 606 405 560 405 470"/>
+   <path id="zzB" d="M196 470 L226 450 L256 486 L286 450 L316 486 L346 450 L376 486 L405 470" stroke-width="4" opacity="0"/>
+  </g>
+ </g>
+ <g id="eggTop">
+  <g fill="#07C160" filter="url(#pencil)">
+   <circle cx="262" cy="392" r="12"/><circle cx="334" cy="372" r="14"/><circle cx="300" cy="432" r="9"/><circle cx="368" cy="432" r="10"/>
+  </g>
+  <g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+   <path class="eggT" d="M405 470 C405 384 358 334 300 334 C242 334 196 384 196 470"/>
+   <path class="zz" d="M196 470 L226 450 L256 486 L286 450 L316 486 L346 450 L376 486 L405 470" stroke-width="4"/>
+  </g>
+ </g>
+ <g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="3.5">
+  <path class="wob" d="M164 410 q-14 20 -2 44 M436 410 q14 20 2 44"/>
+ </g>
+</g>
+<!-- 日历页 -->
+<g id="cal">
+ <path d="M488 296 L912 290 L916 612 L494 618Z" fill="url(#hatch)" opacity=".22" filter="url(#pencil)" transform="translate(12 12)"/>
+ <path d="M476 286 L900 280 L904 600 L482 606Z" fill="#F6F3EA"/>
+ <g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M476 286 L900 280 L904 600 L482 606Z" stroke-width="5"/>
+  <path d="M478 350 C600 346 760 348 902 344" stroke-width="4"/>
+  <path d="M580 300 C566 262 600 248 606 280 M778 296 C764 258 798 246 804 278" stroke-width="5"/>
+ </g>
+ <path d="M480 290 L898 284 L900 344 L480 348Z" fill="url(#ghatch)" opacity=".7" filter="url(#pencil)"/>
+ <g filter="url(#pen)">
+  <text id="planTitle" x="690" y="530" text-anchor="middle" font-size="100" font-weight="700" fill="#34322E" transform="rotate(-2 690 530)">新计划</text>
+ </g>
+</g>
+<g id="burst" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="4">
+ <path class="bs" d="M420 300 l26 -30 M440 346 l38 -10 M380 268 l6 -36"/>
+</g>
+<!-- 标题 -->
+<g filter="url(#pen)">
+ <text id="tt" x="120" y="790" font-size="92" font-weight="700" fill="#34322E" transform="rotate(-2 120 790)">把目标拆成步骤</text>
+</g>
+<path class="ul" d="M360 818 C480 810 600 806 704 800" fill="none" stroke="#07C160" stroke-width="7" stroke-linecap="round" filter="url(#pen)"/>
+<!-- 三项 -->
+<g fill="none" stroke="#07C160" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" filter="url(#pen)">
+ <path class="ck1" d="M122 944 L146 972 L192 912"/>
+ <path class="ck2" d="M122 1134 L146 1162 L192 1102"/>
+ <path class="ck3" d="M122 1324 L146 1352 L192 1292"/>
+</g>
+<g filter="url(#pen)">
+ <text id="i1" x="222" y="976" font-size="62" font-weight="700" fill="#34322E">整理现有资料</text>
+ <text id="i2" x="222" y="1166" font-size="62" font-weight="700" fill="#34322E">安排执行步骤</text>
+ <text id="i3" x="222" y="1356" font-size="62" font-weight="700" fill="#34322E">完成后做检查</text>
+</g>
+<!-- 拼图 -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+ <path class="pz1" d="M720 880 L816 878 L818 912 C842 900 850 940 818 936 L820 980 L722 982Z"/>
+</g>
+<g id="pz2g">
+ <path d="M826 880 L922 878 L924 982 L828 984 L828 940 C856 950 856 906 828 916Z" fill="url(#ghatch)" opacity=".85" filter="url(#pencil)"/>
+ <g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+  <path class="pz2" d="M826 880 L922 878 L924 982 L828 984 L828 940 C856 950 856 906 828 916Z"/>
+ </g>
+</g>
+<!-- 价签 -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <path class="tag" d="M760 1064 L900 1060 L936 1112 L902 1164 L762 1168Z" stroke-width="4.5"/>
+ <circle class="tag" cx="902" cy="1112" r="9" stroke-width="3.5"/>
+ <path class="tag" d="M910 1106 C940 1070 940 1050 960 1040" stroke-width="3"/>
+ <path class="tagl" d="M786 1100 q20 -8 40 0 t40 0 M786 1130 q16 -6 32 0 t30 0" stroke-width="3.5"/>
+</g>
+<path id="tagh" d="M764 1150 L902 1146 L912 1160 L764 1166Z" fill="url(#hatch)" opacity="0" filter="url(#pencil)"/>
+<!-- 火苗 + 放大镜 -->
+<path id="flh" d="M790 1340 C770 1300 800 1270 806 1246 C826 1272 842 1290 834 1340Z" fill="url(#ghatch)" opacity="0" filter="url(#pencil)"/>
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round">
+ <path class="fl" d="M780 1344 C752 1310 770 1270 800 1236 C804 1258 816 1268 826 1262 C824 1286 852 1300 846 1328 C842 1342 834 1348 820 1350 C800 1352 790 1350 780 1344Z" stroke-width="4.5"/>
+ <circle class="mg" cx="810" cy="1294" r="74" stroke-width="5"/>
+ <path class="mg" d="M864 1346 L922 1402" stroke-width="10"/>
+ <path class="mg" d="M772 1254 q16 -16 36 -18" stroke-width="3"/>
+</g>
+</g></svg>
+<script>
+var D=10.2; SK.page(document.getElementById('sv'));
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:330,cy:470,s:1.6});
+// 0–0.6 蛋晃
+SK.draw(tl,'.eggT,.eggB',0.0,0.3);
+tl.set('.zz',{opacity:0},0); 
+tl.fromTo('#egg',{rotation:0,svgOrigin:'300 606'},{keyframes:[{rotation:-8,duration:.12},{rotation:8,duration:.14},{rotation:-6,duration:.12},{rotation:0,duration:.12}],ease:'none'},0.12);
+SK.draw(tl,'.wob',0.3,0.15);
+tl.to('.wob',{opacity:0,duration:.1},0.7);
+// 0.6 裂开
+tl.set('.zz',{opacity:1},0.6); SK.draw(tl,'.zz',0.6,0.25);
+tl.to('#egg',{x:-6,duration:.04,yoyo:true,repeat:5,ease:'steps(1)'},0.62);
+// 1.9 顶壳飞起
+tl.set('#zzB',{opacity:1},1.95);
+tl.to('#eggTop',{x:-90,y:-150,rotation:-40,svgOrigin:'300 470',duration:.35,ease:'power2.out'},1.95);
+tl.to('#eggTop',{opacity:0,duration:.2},2.25);
+// 2.2 日历弹出
+cam.to({cx:560,cy:520,s:1.3},0.5,'power2.inOut',1.95);
+tl.fromTo('#cal',{opacity:0,scale:.15,x:-390,y:150,rotation:-20,svgOrigin:'690 445'},{opacity:1,scale:1,x:0,y:0,rotation:0,duration:.45,ease:'back.out(1.5)'},2.15);
+SK.draw(tl,'.bs',2.35,0.15);
+tl.to('#burst',{opacity:0,duration:.15},3.0);
+SK.write(tl,'#planTitle',2.4,0.42);
+// 3.4 拉开写标题
+cam.to({cx:540,cy:880,s:1.0},0.7,'power2.inOut',2.95);
+SK.write(tl,'#tt',3.35,0.9);
+SK.draw(tl,'.ul',4.4,0.35);
+// 三项
+SK.draw(tl,'.ck1',5.66,0.2); SK.write(tl,'#i1',5.76,0.55);
+SK.draw(tl,'.pz1',5.8,0.35);
+tl.fromTo('#pz2g',{x:70,opacity:0},{x:0,opacity:1,duration:.35,ease:'back.out(2)'},6.1);
+SK.draw(tl,'.pz2',6.0,0.01);
+SK.draw(tl,'.ck2',6.8,0.2); SK.write(tl,'#i2',6.9,0.5);
+SK.draw(tl,'.tag',6.95,0.3,0.1); SK.draw(tl,'.tagl',7.35,0.25); SK.show(tl,'#tagh',7.5,0.2,.5);
+SK.draw(tl,'.ck3',7.9,0.2); SK.write(tl,'#i3',8.0,0.5);
+SK.draw(tl,'.fl',8.1,0.4); SK.show(tl,'#flh',8.5,0.2,.8);
+SK.draw(tl,'.mg',8.6,0.35,0.12);
+tl.fromTo('#flh',{scaleY:1,svgOrigin:'810 1344'},{scaleY:1.12,duration:.12,yoyo:true,repeat:5,ease:'steps(2)'},8.7);
+SK.mount(tl,D);
+</script></body></html>

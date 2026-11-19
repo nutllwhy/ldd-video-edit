@@ -1,0 +1,229 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1920px;height:1080px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<!-- 火柴人参考镜头：整理两张记录卡。拿起一张→比对→发现重复→放进整理区→保留另一张并打勾→冲镜头笑。1920×1080，8 s。
+     人物 = 圆头 + 单线躯干 + 两根 IK 胳膊（肩肘腕两段，末端小黑点当手）；纸上的 .ml 元素自动生成错位色块 + 带小缺口的钢笔线 -->
+<svg id="sv" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+  <clipPath id="belowEdge"><path d="M-400 691 C700 687 1220 693 2400 689 L2400 1600 L-400 1600Z"/></clipPath>
+</defs>
+<g id="world">
+
+<!-- ========== 火柴人 ========== -->
+<g id="charA">
+<g id="body" fill="none" stroke="#2B2826" stroke-linecap="round" stroke-linejoin="round" filter="url(#pen)">
+  <path d="M0 0 C2 -70 -2 -140 0 -200" stroke-width="7"/>
+  <g id="head">
+    <circle cx="0" cy="0" r="62" fill="#F6F3EA" stroke-width="7"/>
+    <g id="eyes" stroke="none" fill="#2B2826"><circle class="ball" cx="-22" cy="-4" r="7"/><circle class="ball" cx="22" cy="-4" r="7"/></g>
+    <g id="eClose" stroke-width="5" opacity="0"><path d="M-30 -3 Q-22 2 -14 -3 M14 -3 Q22 2 30 -3"/></g>
+    <g id="eHappy" stroke-width="5" opacity="0"><path d="M-31 0 Q-22 -13 -13 0 M13 0 Q22 -13 31 0"/></g>
+    <g id="mouth" transform="translate(0 24)">
+      <g class="mo0"><path d="M-12 0 Q0 9 12 0" stroke-width="5"/></g>
+      <g class="mo1" opacity="0"><ellipse cx="0" cy="4" rx="7" ry="9" stroke-width="4.5"/></g>
+      <g class="mo2" opacity="0"><path d="M-17 -2 Q0 22 17 -2 Z" fill="#2B2826" stroke-width="4"/></g>
+    </g>
+    <text id="bang" x="78" y="-60" font-size="96" font-weight="700" fill="#FF6A3D" stroke="none" transform="rotate(12 90 -90)" opacity="0">!</text>
+    <path class="sp" d="M-82 -62 l-24 -18 M-92 -12 l-30 -2 M82 -62 l24 -18 M92 -12 l30 -2" stroke-width="5"/>
+  </g>
+</g>
+</g>
+
+<!-- ========== 桌子 ========== -->
+<path d="M300 690 L1620 688 L1750 1000 L170 1000Z" fill="#F4DDB8" transform="translate(4 3)"/>
+<path d="M170 1000 L1750 1000 L1760 1100 L160 1100Z" fill="#E3C394" transform="translate(4 3)"/>
+<g filter="url(#pen)" fill="none" stroke="#2B2826" stroke-linecap="round" stroke-linejoin="round">
+  <path class="tb" d="M300 690 C700 686 1220 692 1620 688" stroke-width="4.5"/>
+  <path class="tb" d="M170 1000 C700 996 1220 1004 1750 1000" stroke-width="5"/>
+  <path class="tb" d="M300 690 L170 1000 M1620 688 L1750 1000" stroke-width="4.5"/>
+  <path class="tg" d="M420 770 q120 -6 240 0 M1330 770 q110 -5 200 0 M360 900 q140 -6 260 2" stroke="#B48E5E" stroke-width="2.6"/>
+</g>
+
+<!-- ========== 记录 B（保留项） ========== -->
+<g id="recordB" transform="translate(1062 830) rotate(-3) skewX(-8) scale(.85 .43)">
+  <path class="ml" data-f="#FFFFFF" d="M0 0 L-190 0 L-190 -240 L-40 -240 L0 -200Z"/>
+  <path class="ml" data-f="#EDE8DE" d="M-40 -240 L-40 -200 L0 -200Z"/>
+  <path class="ml" data-f="#9CCBF2" d="M-130 -146 C-130 -192 -60 -192 -60 -146 C-72 -154 -84 -154 -95 -146 C-106 -154 -118 -154 -130 -146Z"/>
+  <g fill="none" stroke="#2B2826" stroke-linecap="round" filter="url(#pen)">
+    <path d="M-95 -146 L-95 -112 C-95 -102 -106 -102 -106 -110" stroke-width="4.5"/>
+    <path d="M-160 -80 q16 -6 32 0 t32 0 t32 0 t28 0 M-160 -54 q16 -6 32 0 t32 0 t26 0 M-160 -28 q14 -5 28 0 t28 0 t30 0" stroke="#A39C90" stroke-width="3.4"/>
+  </g>
+  <g fill="none" stroke="#FF6A3D" stroke-linecap="round" stroke-width="6" filter="url(#pen)">
+    <ellipse class="cB" cx="-95" cy="-150" rx="64" ry="52" transform="rotate(-6 -95 -150)"/>
+    <ellipse class="cB" cx="-92" cy="-148" rx="60" ry="56" transform="rotate(8 -95 -150)"/>
+    <path class="ck" d="M-150 -78 L-112 -30 L-30 -140" stroke-width="12"/>
+  </g>
+</g>
+
+<g id="arms" fill="none" stroke="#2B2826" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#pen)">
+  <path id="armL"/><path id="armR"/>
+  <circle id="handL" r="9" fill="#2B2826" stroke="none"/><circle id="handR" r="9" fill="#2B2826" stroke="none"/>
+</g>
+
+<!-- ========== 收纳筐后沿 ========== -->
+<path d="M1200 740 L1464 738 L1492 824 L1172 826Z" fill="#B9DDB2" transform="translate(3 2)"/>
+<g filter="url(#pen)" fill="none" stroke="#2B2826" stroke-linecap="round" stroke-linejoin="round">
+  <path class="tr" d="M1200 740 L1464 738 L1492 824 L1172 826Z" stroke-width="4.5"/>
+</g>
+
+
+<!-- ========== 记录 A（重复项） ========== -->
+<g id="recordA">
+  <path class="ml" data-f="#FFFFFF" d="M0 0 L-190 0 L-190 -240 L-40 -240 L0 -200Z"/>
+  <path class="ml" data-f="#EDE8DE" d="M-40 -240 L-40 -200 L0 -200Z"/>
+  <path class="ml" data-f="#9CCBF2" d="M-130 -146 C-130 -192 -60 -192 -60 -146 C-72 -154 -84 -154 -95 -146 C-106 -154 -118 -154 -130 -146Z"/>
+  <g fill="none" stroke="#2B2826" stroke-linecap="round" filter="url(#pen)">
+    <path d="M-95 -146 L-95 -112 C-95 -102 -106 -102 -106 -110" stroke-width="4.5"/>
+    <path d="M-160 -80 q16 -6 32 0 t32 0 t32 0 t28 0 M-160 -54 q16 -6 32 0 t32 0 t26 0 M-160 -28 q14 -5 28 0 t28 0 t30 0" stroke="#A39C90" stroke-width="3.4"/>
+  </g>
+  <g fill="none" stroke="#FF6A3D" stroke-linecap="round" stroke-width="6" filter="url(#pen)">
+    <ellipse class="cA" cx="-95" cy="-150" rx="64" ry="52" transform="rotate(-6 -95 -150)"/>
+    <ellipse class="cA" cx="-92" cy="-148" rx="60" ry="56" transform="rotate(8 -95 -150)"/>
+  </g>
+</g>
+
+<!-- ========== 收纳筐前板 ========== -->
+<path d="M1172 826 L1492 824 L1476 902 L1188 904Z" fill="#9FD096" transform="translate(3 2)"/>
+<g filter="url(#pen)" fill="none" stroke="#2B2826" stroke-linecap="round" stroke-linejoin="round">
+  <path class="tr" d="M1172 826 L1492 824 L1476 902 L1188 904Z" stroke-width="4.5"/>
+</g>
+<g filter="url(#pen)"><text id="tuidiao" x="1332" y="882" text-anchor="middle" font-size="44" font-weight="700" fill="#2B2826" transform="rotate(-2 1332 870)">整理区</text></g>
+
+<g filter="url(#pen)">
+  <text id="same" x="1262" y="372" font-size="66" font-weight="700" fill="#FF6A3D" transform="rotate(-5 1262 372)">内容重复</text>
+</g>
+</g></svg>
+<script>
+// 萌粒线稿：每个 .ml 生成「错位色块 + 带小缺口的钢笔线」
+(function(){var seed=11; function rnd(){seed=(seed*9301+49297)%233280;return seed/233280;}
+document.querySelectorAll('.ml').forEach(function(p){
+  var f=p.getAttribute('data-f'), fill=p.cloneNode(); fill.removeAttribute('class');
+  fill.setAttribute('fill',f); fill.setAttribute('stroke','none'); fill.setAttribute('transform','translate('+(3.5+rnd()*2.5).toFixed(1)+' '+(3+rnd()*2).toFixed(1)+')');
+  p.parentNode.insertBefore(fill,p);
+  p.setAttribute('fill','none'); p.setAttribute('stroke','#2B2826'); p.setAttribute('stroke-width','4.2');
+  p.setAttribute('stroke-linecap','round'); p.setAttribute('stroke-linejoin','round'); p.setAttribute('filter','url(#pen)');
+  var L=p.getTotalLength(), a=[], s=0; while(s<L){var d=90+rnd()*200, g=4+rnd()*4; a.push(d.toFixed(0),g.toFixed(0)); s+=d+g;}
+  p.setAttribute('stroke-dasharray',a.join(' '));
+});})();
+
+var D=8.0; SK.page(document.getElementById('sv'), {accent:'#FF6A3D'});
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:960,cy:560,s:1.08});
+
+var S={lean:0,hop:0,tilt:0,lx:0,ly:0,blink:0,happy:0,wide:0,mo:0,swing:0,spread:0,by:0,
+  R:{x:1150,y:770,m:0}, L:{x:790,y:770,m:0}, grip:0,
+  A:{x:1085,y:806,a:4,k:-8,sy:.5}};
+var ROOT={x:960,y:780}, L1=140, L2=140, PALM=0, T=0;
+function rot(x,y,deg){var r=deg*Math.PI/180,c=Math.cos(r),s=Math.sin(r);return [x*c-y*s,x*s+y*c];}
+function bodyPt(x,y){var p=rot(x,y,S.lean);return {x:ROOT.x+p[0],y:ROOT.y+S.hop+S.by+p[1]};}
+function ik(sh,tg,side){
+  var dx=tg.x-sh.x,dy=tg.y-sh.y,d=Math.hypot(dx,dy)||1,L2e=L2+PALM;
+  var dm=Math.max(40,Math.min(d,L1+L2e-1)),th=Math.atan2(dy,dx);
+  var c=(L1*L1+dm*dm-L2e*L2e)/(2*L1*dm); c=Math.max(-1,Math.min(1,c)); var a=Math.acos(c);
+  var e1={x:sh.x+L1*Math.cos(th+a),y:sh.y+L1*Math.sin(th+a)},e2={x:sh.x+L1*Math.cos(th-a),y:sh.y+L1*Math.sin(th-a)};
+  var sc=function(e){return e.x*side+e.y*.5}; var e=sc(e1)>sc(e2)?e1:e2;
+  var p={x:sh.x+dx/d*dm,y:sh.y+dy/d*dm},fx=p.x-e.x,fy=p.y-e.y,fl=Math.hypot(fx,fy)||1;
+  return {e:e,w:{x:e.x+fx/fl*L2,y:e.y+fy/fl*L2},p:p,ang:Math.atan2(fy,fx)*180/Math.PI};
+}
+function q(n){return n.toFixed(1)}
+function arm(id,hid,sh,st,side){
+  var k=ik(sh,st,side);
+  var rc=function(a,b,r){var dx=b.x-a.x,dy=b.y-a.y,l=Math.hypot(dx,dy)||1,m=Math.min(r,l*.4);return {x:b.x-dx/l*m,y:b.y-dy/l*m}},e1=rc(sh,k.e,18),e2=rc(k.w,k.e,18);
+  document.getElementById(id).setAttribute('d','M'+q(sh.x)+' '+q(sh.y)+' L'+q(e1.x)+' '+q(e1.y)+' Q'+q(k.e.x)+' '+q(k.e.y)+' '+q(e2.x)+' '+q(e2.y)+' L'+q(k.w.x)+' '+q(k.w.y));
+  var h=document.getElementById(hid); h.setAttribute('cx',q(k.w.x)); h.setAttribute('cy',q(k.w.y));
+  return k;
+}
+function draw(){
+  S.by=Math.sin(T*2*Math.PI/2.6)*2.2;
+  document.getElementById('body').setAttribute('transform','translate('+ROOT.x+' '+q(ROOT.y+S.hop+S.by)+') rotate('+q(S.lean)+')');
+  document.getElementById('head').setAttribute('transform','translate(0 -200) rotate('+q(S.tilt)+') translate(0 -66)');
+  document.getElementById('eyes').setAttribute('transform','translate('+q(S.lx*19)+' '+q(S.ly*13)+')');document.getElementById('eClose').setAttribute('transform','translate('+q(S.lx*19)+' '+q(S.ly*13)+')');document.getElementById('eHappy').setAttribute('transform','translate('+q(S.lx*15)+' '+q(S.ly*9)+')');document.getElementById('mouth').setAttribute('transform','translate('+q(S.lx*13)+' '+q(24+S.ly*7)+')');
+  var op=Math.max(.15,1-S.blink), w=1+S.wide*.4;
+  document.querySelectorAll('#eyes .ball').forEach(function(e){e.setAttribute('r',q(7*w))});
+  var closed=S.blink>.6, happy=S.happy>.5;
+  document.getElementById('eyes').setAttribute('opacity',(closed||happy)?0:1);
+  document.getElementById('eClose').setAttribute('opacity',closed&&!happy?1:0);
+  document.getElementById('eHappy').setAttribute('opacity',happy?1:0);
+  [0,1,2].forEach(function(m){document.querySelector('#mouth .mo'+m).setAttribute('opacity',Math.round(S.mo)===m?1:0)});
+  arm('armL','handL',bodyPt(-6,-168),S.L,-1);
+  var kr=arm('armR','handR',bodyPt(6,-168),S.R,1);
+  if(S.grip>.5){S.A.x=kr.p.x+6; S.A.y=kr.p.y+4;}
+  document.getElementById('recordA').setAttribute('transform','translate('+q(S.A.x)+' '+q(S.A.y)+') rotate('+q(S.A.a)+') skewX('+q(S.A.k)+') scale(.85 '+(S.A.sy*.85).toFixed(3)+')');
+}
+
+// 0–0.7 画桌面、记录卡、整理区；人物出现
+SK.draw(tl,'.tb',0.0,0.4,0.08); SK.draw(tl,'.tg',0.3,0.3,0.05);
+SK.show(tl,'#charA',0.08,0.25); SK.show(tl,'#arms',0.08,0.25);
+SK.drop(tl,'#recordB',0.30,0); SK.show(tl,'#recordA',0.42,0.2);
+SK.draw(tl,'.tr',0.45,0.3,0.06); SK.write(tl,'#tuidiao',0.6,0.35);
+tl.set('.sp',{opacity:0},0);
+tl.to(S,{blink:1,duration:.06,yoyo:true,repeat:1,ease:'none'},0.55);
+
+// 0.75–1.4 看向记录卡，伸手
+tl.to(S,{lx:.5,ly:.9,duration:.18,ease:'power2.out'},0.75);
+tl.to(S,{tilt:7,lean:3,duration:.5,ease:'power2.inOut'},0.8);
+tl.to(S,{swing:-4,duration:.35,ease:'power1.out'},0.95); tl.to(S,{swing:0,duration:.5,ease:'sine.inOut'},1.3);
+tl.to(S.R,{x:1110,y:720,duration:.3,ease:'power2.out'},0.9);
+tl.to(S.R,{x:1085,y:806,duration:.28,ease:'power2.in'},1.2);
+tl.set(S.R,{m:1},1.42); tl.set(S,{grip:1},1.42);
+
+// 1.45–2.1 捏住、拿起来立着看
+tl.to(S.R,{x:1242,y:596,duration:.62,ease:'power2.inOut'},1.5);
+tl.to(S.A,{sy:1,k:0,a:-3,duration:.6,ease:'power2.inOut'},1.5);
+tl.to(S,{lx:.95,ly:-.15,tilt:2,lean:-3,duration:.4,ease:'power2.inOut'},1.6);
+cam.to({cx:1060,cy:560,s:1.18},0.8,'power2.inOut',1.3);
+
+// 2.15–3.3 来回比一比
+tl.to(S,{lx:.2,ly:.95,duration:.1,ease:'power2.out'},2.15);
+tl.to(S,{lx:.95,ly:-.15,duration:.1,ease:'power2.out'},2.42);
+tl.to(S,{lx:.2,ly:.95,duration:.1,ease:'power2.out'},2.62);
+
+// 2.8(+0.6) 发现内容重复
+tl.to(S,{lx:.5,ly:.1,wide:1,mo:1,duration:.08,ease:'none'},2.82);
+tl.to(S,{hop:-14,spread:7,duration:.12,ease:'power2.out'},2.82); tl.to(S,{hop:0,spread:0,duration:.35,ease:'back.out(3)'},2.94);
+SK.show(tl,'#bang',2.84,0.12);
+SK.draw(tl,'.cA',2.95,0.22,0.12); SK.draw(tl,'.cB',3.05,0.22,0.12);
+SK.write(tl,'#same',3.0,0.45);
+tl.to(S,{wide:0,mo:0,duration:.1,ease:'none'},3.45); tl.to('#bang',{opacity:0,duration:.15,ease:'steps(2)'},3.5);
+tl.to(S,{blink:1,duration:.06,yoyo:true,repeat:1,ease:'none'},3.52);
+
+// 拿去放进整理区
+cam.to({cx:1080,cy:600,s:1.1},0.7,'power2.inOut',3.55);
+tl.to(S,{lean:11,tilt:4,lx:.8,ly:.85,duration:.6,ease:'power2.inOut'},3.6);
+tl.to(S,{swing:-6,duration:.4,ease:'power1.out'},3.75); tl.to(S,{swing:2,duration:.4,ease:'sine.inOut'},4.15); tl.to(S,{swing:0,duration:.5,ease:'sine.inOut'},4.55);
+tl.to(S.R,{x:1250,y:700,duration:.7,ease:'power2.inOut'},3.6);
+tl.to(S.A,{a:8,duration:.7,ease:'power2.inOut'},3.6);
+tl.to('#same',{opacity:0,duration:.2,ease:'steps(2)'},3.7);
+
+// 松手，纸落进筐
+tl.set(S,{grip:0},4.38); tl.set(S.R,{m:0},4.4);
+tl.fromTo(S.A,{x:1250,y:700},{x:1420,y:846,duration:.32,ease:'power2.in',immediateRender:false},4.38);
+tl.to(S.A,{sy:.3,k:-14,duration:.32,ease:'power2.in'},4.38);
+tl.to(S.A,{a:-6,duration:.2,ease:'power1.out'},4.5); tl.to(S.A,{a:-2,duration:.25,ease:'sine.inOut'},4.7);
+tl.to(S.R,{x:1200,y:680,duration:.25,ease:'power2.out'},4.5);
+tl.to(S.R,{x:1150,y:770,duration:.4,ease:'power2.inOut'},4.75);
+
+// 回头点一下留下的那张，打勾
+tl.to(S,{lean:-2,tilt:-4,lx:.1,ly:.95,duration:.45,ease:'power2.inOut'},4.75);
+cam.to({cx:980,cy:600,s:1.12},0.6,'power2.inOut',4.75);
+tl.to(S.L,{x:975,y:758,duration:.35,ease:'power2.out'},4.85); tl.set(S.L,{m:2},4.95);
+tl.to(S.L,{y:768,duration:.08,yoyo:true,repeat:1,ease:'none'},5.12);
+SK.draw(tl,'.ck',5.15,0.28);
+tl.to(S.L,{x:790,y:770,duration:.4,ease:'power2.inOut'},5.5); tl.set(S.L,{m:0},5.62);
+
+// 抬头冲镜头笑
+cam.to({cx:960,cy:560,s:1.06},0.9,'power2.inOut',5.6);
+tl.to(S,{lean:0,tilt:-7,lx:0,ly:0,duration:.4,ease:'power2.out'},5.7);
+tl.set(S,{mo:2},5.9); tl.to(S,{happy:1,duration:.05},5.92);
+tl.to(S,{hop:-12,spread:6,duration:.12,ease:'power2.out'},5.92); tl.to(S,{hop:0,spread:0,duration:.4,ease:'back.out(3)'},6.04);
+tl.set('.sp',{opacity:1},5.95); SK.draw(tl,'.sp',5.95,0.2);
+tl.to(S,{happy:0,duration:.05},6.5);
+
+tl.shiftChildren(0.6,false,2.7);
+tl.to(S,{lx:.95,ly:-.15,duration:.1,ease:'power2.out'},2.88);
+tl.to(S,{lx:.2,ly:.95,duration:.1,ease:'power2.out'},3.12);
+tl.to(S,{tilt:-4,duration:.3,ease:'sine.inOut'},2.8);
+tl.to(S,{blink:1,duration:.06,yoyo:true,repeat:1,ease:'none'},7.35);
+SK.mount(tl,D);
+var _r=window.render; window.render=function(t){_r(t); T=t; draw();}; window.render(0);
+</script></body></html>

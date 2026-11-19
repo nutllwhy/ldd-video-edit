@@ -1,0 +1,40 @@
+{
+  "total": 24.0,
+  "snap": 1.6,
+  "full": "work/v_full.mp4",
+  "square": "work/v_sq.mp4",
+  "circ": "work/v_circ.mp4",
+  "voice": "work/voice.wav",
+  "music": null,
+  "cues": "work/cues.json",
+  "circle": [300, 48, 1240],
+  "seam": 840,
+  "subs_y": 1430,
+  "push": [[19.2, 0.2, 1.06, 19.8]],
+  "clips": [
+    {
+      "file": "anim/renders/shot-01.mp4",
+      "start": 0,
+      "dur": 6,
+      "mode": "vs"
+    },
+    {
+      "file": "anim/renders/shot-02.mp4",
+      "start": 6,
+      "dur": 6,
+      "mode": "vh"
+    },
+    {
+      "file": "anim/renders/shot-03.mp4",
+      "start": 12,
+      "dur": 7,
+      "mode": "vs"
+    },
+    {
+      "file": "anim/renders/shot-04.mp4",
+      "start": 19,
+      "dur": 5,
+      "mode": "bare"
+    }
+  ]
+}

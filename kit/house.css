@@ -1,0 +1,9 @@
+/* House kit — shared stage rules for all three series styles. */
+html,body{margin:0;width:1440px;height:1080px;overflow:hidden}
+#root{position:relative;width:1440px;height:1080px;overflow:hidden}
+.world{position:absolute;left:0;top:0;width:1440px;height:1080px;transform-origin:0 0}
+.full{position:absolute;left:0;top:0;width:1440px;height:1080px}
+svg.full{display:block;overflow:visible}
+/* Subtitle band is burned in at edit time (y 930-1040). Keep key content above y=920. */
+/* Debug: add class "safe" to #root to see the band. */
+#root.safe::after{content:"";position:absolute;left:0;right:0;top:930px;height:110px;background:rgba(255,0,0,.18);z-index:999}

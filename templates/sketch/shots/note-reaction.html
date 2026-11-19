@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1080px;height:1920px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="world">
+<!-- 引用便签 -->
+<g id="note">
+ <path d="M144 250 L962 240 L968 570 L150 580Z" fill="url(#hatch)" opacity=".2" filter="url(#pencil)" transform="translate(10 12)"/>
+ <path d="M130 236 L950 226 L956 556 L136 566Z" fill="#FBF6DC" stroke="#3E3C38" stroke-width="4" stroke-linejoin="round" filter="url(#pencil)"/>
+ <path d="M470 206 L620 214 L616 262 L466 254Z" fill="url(#hatch)" opacity=".35" filter="url(#pencil)"/>
+ <path d="M470 206 L620 214 L616 262 L466 254Z" fill="none" stroke="#6B675E" stroke-width="3" stroke-dasharray="8 6" filter="url(#pencil)"/>
+ <g filter="url(#pen)">
+  <text id="q1" x="186" y="384" font-size="60" font-weight="700" fill="#34322E">先把目标说清楚</text>
+  <text id="q2" x="186" y="490" font-size="60" font-weight="700" fill="#34322E">再把步骤拆开</text>
+ </g>
+ <path class="ul" d="M428 528 C520 524 620 522 732 518" fill="none" stroke="#07C160" stroke-width="7" stroke-linecap="round" filter="url(#pen)"/>
+</g>
+<!-- 大佬 -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+ <circle class="bh" cx="320" cy="870" r="58"/>
+ <path class="bh" d="M264 856 C270 808 340 796 376 842 M300 814 C312 830 340 838 374 840" stroke-width="4"/>
+ <path class="bh" d="M318 868 q5 4 10 0 M346 868 q5 4 10 0" stroke-width="3.5"/>
+ <path id="mo1" class="bh" d="M328 900 q9 4 18 0" stroke-width="3.5"/>
+ <circle id="mo2" cx="338" cy="902" r="7" stroke-width="3.5" opacity="0"/>
+ <path class="bb" d="M262 1004 C266 962 290 938 320 936 C350 938 376 962 380 1004 L386 1222 L256 1222Z"/>
+ <path class="bb" d="M298 938 L320 1004 L342 938" stroke-width="4"/>
+ <path class="bb" d="M268 970 C254 1030 248 1090 262 1170" />
+ <path class="bl" d="M292 1222 L288 1356 L264 1362 M350 1222 L354 1356 L378 1362"/>
+ <!-- 手机 -->
+ <path class="ph" d="M594 790 L832 786 C846 786 852 794 852 808 L856 1270 C856 1284 848 1290 834 1290 L598 1294 C584 1294 576 1286 576 1272 L574 810 C574 798 582 790 594 790Z" fill="#F6F3EA" stroke-width="5"/>
+ <path class="ph" d="M594 836 L834 832 L836 1244 L596 1248Z" stroke-width="3.5"/>
+ <path class="ph" d="M690 812 L740 811" stroke-width="4"/>
+ <path class="ba" d="M372 966 C392 1020 410 1070 428 1098 C470 1090 530 1086 580 1080"/>
+ <path class="ba" d="M560 1060 C576 1056 592 1062 594 1072 M560 1090 C578 1088 594 1094 594 1104" stroke-width="4"/>
+</g>
+<path id="tie" d="M314 948 L326 948 L332 1012 L320 1034 L308 1012Z" fill="url(#hatch)" stroke="#3E3C38" stroke-width="3" opacity="0" filter="url(#pencil)"/>
+<path id="bsh" d="M262 1180 L384 1176 L386 1222 L256 1222Z" fill="url(#hatch)" opacity="0" filter="url(#pencil)"/>
+<!-- 角色头上的！ -->
+<g id="ex" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round">
+ <path class="ex" d="M228 690 L240 768" stroke-width="10"/>
+ <circle class="ex" cx="244" cy="796" r="6" stroke-width="7"/>
+ <path class="ex" d="M196 728 l-24 -10 M206 690 l-16 -20" stroke-width="4"/>
+</g>
+<!-- 手机里的绿帽子小人 -->
+<g transform="translate(652 994) scale(.72)"><g id="g1" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="5">
+ <path d="M-36 -146 C-30 -180 30 -180 36 -146 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-128" r="36"/>
+ <path d="M-15 -132 q5 4 10 0 M7 -132 q5 4 10 0" stroke-width="4"/>
+ <path d="M-10 -112 q10 8 20 0" stroke-width="4"/>
+ <path d="M0 -92 L0 -40"/>
+ <path d="M0 -78 L-30 -56 M0 -78 L26 -96 L34 -124"/>
+ <path d="M0 -40 L-18 0 M0 -40 L18 0"/>
+</g></g>
+<g transform="translate(776 1100) scale(.72)"><g id="g2" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="5">
+ <path d="M-36 -146 C-30 -180 30 -180 36 -146 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-128" r="36"/>
+ <path d="M-15 -132 q5 4 10 0 M7 -132 q5 4 10 0" stroke-width="4"/>
+ <path d="M-12 -112 q12 12 24 0" stroke-width="4"/>
+ <path d="M0 -92 L0 -40"/>
+ <path d="M0 -78 L-28 -112 M0 -78 L28 -112"/>
+ <path d="M0 -40 L-26 -6 M0 -40 L26 -6"/>
+</g></g>
+<g transform="translate(676 1232) scale(.72)"><g id="g3" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="5">
+ <path d="M-36 -146 C-30 -180 30 -180 36 -146 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-128" r="36"/>
+ <path d="M-15 -132 q5 4 10 0 M7 -132 q5 4 10 0" stroke-width="4"/>
+ <path d="M-10 -112 q10 8 20 0" stroke-width="4"/>
+ <path d="M0 -92 L0 -40"/>
+ <path d="M0 -78 L-40 -86 M0 -78 L26 -54"/>
+ <path d="M0 -40 L-18 0 M0 -40 L18 0"/>
+</g></g>
+</g></svg>
+<script>
+var D=6.6; SK.page(document.getElementById('sv'));
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:540,cy:420,s:1.1});
+SK.drop(tl,'#note',0.0,-1.5);
+SK.write(tl,'#q1',0.2,0.42); SK.write(tl,'#q2',0.62,0.38);
+SK.draw(tl,'.ul',1.0,0.28);
+cam.to({cx:540,cy:860,s:1.0},0.6,'power2.inOut',2.2);
+SK.draw(tl,'.bh',2.55,0.25,0.05);
+SK.draw(tl,'.bb',2.75,0.3,0.08); SK.show(tl,'#tie',3.0,0.2); SK.show(tl,'#bsh',3.2,0.2,.4);
+SK.draw(tl,'.ph',2.85,0.3,0.1);
+SK.draw(tl,'.bl',3.05,0.25); SK.draw(tl,'.ba',3.2,0.25,0.1);
+// 4.0 起手机里冒出小人
+SK.pop(tl,'#g1',3.95); SK.pop(tl,'#g2',4.65); SK.pop(tl,'#g3',5.35);
+tl.to('#g1',{rotation:-8,transformOrigin:'50% 100%',duration:.12,yoyo:true,repeat:3,ease:'steps(2)'},4.35);
+tl.to('#g2',{y:-14,duration:.15,yoyo:true,repeat:3,ease:'power1.out'},5.05);
+// 角色！
+SK.draw(tl,'.ex',4.15,0.15,0.06);
+tl.set('#mo1',{opacity:0},4.15); tl.set('#mo2',{opacity:1},4.15);
+tl.fromTo('#ex',{scale:1,svgOrigin:'236 800'},{scale:1.25,duration:.12,yoyo:true,repeat:1,ease:'power1.out'},5.45);
+SK.mount(tl,D);
+</script></body></html>

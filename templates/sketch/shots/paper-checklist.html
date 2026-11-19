@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="kit/gsap.min.js"></script><script src="kit/sk.js"></script>
+<style>*{margin:0}body{width:1080px;height:1920px;overflow:hidden;background:#F6F3EA}text{font-family:"Hannotate SC"}</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="world">
+<!-- 截图贴在纸上（裁掉顶部 20px 导航栏） -->
+<g id="shot"><g transform="rotate(-2 540 655)">
+ <rect x="205" y="215" width="670" height="880" fill="#FFFFFF" filter="url(#shadow)"/>
+ <svg x="221" y="231" width="638" height="848" viewBox="0 20 439 584" preserveAspectRatio="none"><image href="assets/shot.png" x="0" y="0" width="439" height="604"/></svg>
+ <rect x="205" y="215" width="670" height="880" fill="none" stroke="#3E3C38" stroke-width="2.5" opacity=".5" filter="url(#pencil)"/>
+</g>
+<g class="tape" opacity="0" transform="translate(0 24)"><path d="M168 236 l8 -6 l-4 -8 l8 -6 L290 170 l-2 8 l8 4 l-4 8 l6 6 L178 256 l-4 -8 l-6 -4Z" fill="#E6DEC6" opacity=".72"/></g>
+<g class="tape" opacity="0" transform="translate(0 24)"><path d="M790 168 l8 6 l8 -4 l2 8 L914 230 l-6 6 l4 8 l-8 4 l2 8 L780 196 l2 -8 l-6 -6Z" fill="#E6DEC6" opacity=".72"/></g>
+</g>
+<!-- 三项任务清单 -->
+<g filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+ <path class="bx1" d="M128 1150 L186 1146 L188 1204 L130 1206 Z"/>
+ <path class="bx2" d="M128 1252 L186 1250 L186 1306 L130 1308 Z"/>
+</g>
+<g filter="url(#pen)">
+ <text id="i1" x="216" y="1200" font-size="62" font-weight="700" fill="#34322E">明确目标</text>
+ <text id="i2" x="216" y="1302" font-size="62" font-weight="700" fill="#34322E">整理素材</text>
+</g>
+<g fill="none" stroke="#07C160" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" filter="url(#pen)">
+ <path class="ck1" d="M136 1172 L158 1196 L204 1128"/>
+ <path class="ck2" d="M136 1274 L158 1298 L204 1230"/>
+</g>
+<!-- 交付清单纸片 -->
+<g id="note" opacity="0"><g transform="rotate(-5)">
+ <path d="M-96 -52 L94 -56 L98 52 L-94 56 Z" fill="#FFFDF6" filter="url(#shadow)"/>
+ <path d="M-96 -52 L94 -56 L98 52 L-94 56 Z" fill="none" stroke="#3E3C38" stroke-width="4" stroke-linejoin="round" filter="url(#pencil)"/>
+ <text x="0" y="18" text-anchor="middle" font-size="52" font-weight="700" fill="#07C160" filter="url(#pen)">已完成</text>
+</g></g>
+<!-- 小人 -->
+<g id="walker" opacity="0"><g transform="scale(1.15)"><g id="stand" filter="url(#pencil)" fill="none" stroke="#3E3C38" stroke-linecap="round" stroke-width="4">
+ <path d="M-36 -146 C-30 -180 30 -180 36 -146 Z" fill="#07C160" stroke="none"/>
+ <circle cx="0" cy="-128" r="36"/>
+ <path d="M-21 -132 q5 4 10 0 M1 -132 q5 4 10 0" stroke-width="3.5"/>
+ <path d="M-18 -112 q10 8 20 0" stroke-width="3"/>
+ <path d="M0 -92 L0 -40"/>
+ <path id="arms" d="M0 -78 L-40 -64 M0 -78 L-36 -86"/>
+ <path d="M0 -40 L-18 0 M0 -40 L18 0"/>
+</g></g></g>
+</g></svg>
+<script>
+var D=6.8; SK.page(document.getElementById('sv'));
+var tl=gsap.timeline({paused:true}); SK.boil(tl,D);
+var cam=SK.cam(tl,'#world',{cx:540,cy:700,s:1.08});
+// 0.1 截图贴上来
+SK.drop(tl,'#shot',0.08,0); SK.show(tl,'.tape',0.45,0.2);
+cam.to({cx:540,cy:960,s:1.0},0.7,'power2.inOut',0.6);
+// 1.0 / 1.8 / 2.6 三项依次写出、打勾
+[[1.05,1],[2.1,2]].forEach(function(a){var t=a[0],i=a[1];
+ SK.draw(tl,'.bx'+i,t,0.25); SK.write(tl,'#i'+i,t+0.12,0.35); SK.draw(tl,'.ck'+i,t+0.5,0.2);});
+// 4.5 小人冒出来，递出清单
+tl.set('#walker',{x:1160,y:1440},0); tl.set('#walker',{opacity:1},4.6);
+tl.to('#walker',{keyframes:[{x:960,y:1380,duration:.18,ease:'power1.out'},{x:830,y:1440,duration:.2,ease:'power2.in'}]},4.6);
+tl.set('#note',{x:1020,y:1320},0); tl.set('#note',{opacity:1},4.6);
+tl.to('#note',{keyframes:[{x:820,y:1260,duration:.18,ease:'power1.out'},{x:690,y:1330,duration:.2,ease:'power2.in'}]},4.6);
+tl.fromTo('#stand',{scaleY:.9,transformOrigin:'50% 100%'},{scaleY:1,duration:.25,ease:'back.out(3)'},4.98);
+// 递出去
+tl.set('#arms',{strokeDasharray:'none'},0);
+tl.to('#arms',{attr:{d:'M0 -78 L-70 -76 M0 -78 L-66 -94'},duration:.35,ease:'back.out(2)'},5.4);
+tl.to('#note',{x:620,y:1300,scale:1.1,rotation:-3,duration:.35,ease:'back.out(2)'},5.4);
+tl.to('#note',{y:1292,duration:.2,yoyo:true,repeat:3,ease:'sine.inOut'},5.9);
+SK.mount(tl,D);
+</script></body></html>
