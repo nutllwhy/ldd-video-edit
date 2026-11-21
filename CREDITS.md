@@ -1,5 +1,11 @@
 # 参考的开源项目
 
+## 本仓库的许可范围
+
+本仓库原创内容采用 MIT License，详见根目录的 `LICENSE`。第三方组件不包含在该授权内，仍适用各自的许可和随附声明。
+
+仓库包含 `kit/gsap.min.js`，其文件头注明适用 GreenSock Standard License。使用该组件前，请查看 [GreenSock Standard License](https://gsap.com/standard-license)。
+
 本 skill 的规则是自己写的，部分做法和数字参考了下面这些 MIT 协议的开源项目，没有复制它们的代码。
 
 | 项目 | 参考了什么 |

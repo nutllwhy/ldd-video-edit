@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- Added an MIT License for original repository content, with third-party components explicitly excluded.
+- Rewrote the README in Chinese for the project's primary audience.
+
 ## v0.8 — Style menu and reusable hand-drawn presets
 - Added five switchable SK presets: pencil, journal, kraft, mono, and chalk.
 - Added style-aware SVG helpers for shapes, lines, text, fills, and color palettes.
