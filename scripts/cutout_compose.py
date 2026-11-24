@@ -36,12 +36,13 @@ SQ = 1080   # 抠像在 1080 正方形上做，最后再缩放
 LAYOUT = {
     'vertical': dict(W=1080, H=1920, bar_k=1.0,
                      card=dict(x=40, w=1000, y=190, y_nobar=120, max_h=760, r=22),
-                     panel=(32, 1000, 1048, 1888), panel_r=44,
+                     panel=(32, 1000, 1048, 1888), panel_r=44, shadow=False,
                      person=dict(size=820, face_x=0.28, top=1170)),
     'landscape': dict(W=1440, H=1080, bar_k=0.8,
-                      card=dict(x=520, w=880, y=150, y_nobar=60, max_h=560, r=20),
-                      panel=(28, 440, 496, 1052), panel_r=36,     # 面板和卡片左右错开，不在角上叠
-                      person=dict(size=580, face_x=0.18, top=520)),
+                      # 素材是主角：卡片铺满章节条以下，人叠在卡片左下角，不另垫面板，靠描边 + 投影分层
+                      card=dict(x=40, w=1360, y=150, y_nobar=60, max_h=780, r=20),
+                      panel=None, panel_r=0, shadow=True,
+                      person=dict(size=540, face_x=0.14, top=560)),
 }
 
 
@@ -148,8 +149,11 @@ def main():
     cw, ch = cw // 2 * 2, ch // 2 * 2
     cx = cd['x'] + (cd['w'] - cw) // 2; cy = cd['y'] if has_bar else cd['y_nobar']
     m = Image.new('L', (cw, ch), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, cw - 1, ch - 1), cd['r'], fill=255); m.save(f'{wd}/plate/card.png')
-    pm = Image.new('L', (W, H), 0); ImageDraw.Draw(pm).rounded_rectangle(L['panel'], L['panel_r'], fill=255); pm.save(f'{wd}/plate/panel.png')
-    pe = Image.new('RGBA', (W, H), (0, 0, 0, 0)); ImageDraw.Draw(pe).rounded_rectangle(L['panel'], L['panel_r'], outline=(255, 255, 255, 46), width=2); pe.save(f'{wd}/plate/edge.png')
+    pm = Image.new('L', (W, H), 0); pe = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    if L['panel']:
+        ImageDraw.Draw(pm).rounded_rectangle(L['panel'], L['panel_r'], fill=255)
+        ImageDraw.Draw(pe).rounded_rectangle(L['panel'], L['panel_r'], outline=(255, 255, 255, 46), width=2)
+    pm.save(f'{wd}/plate/panel.png'); pe.save(f'{wd}/plate/edge.png')
 
     # 5. 合成
     still = os.path.splitext(c['screen'])[1].lower() in ('.png', '.jpg', '.jpeg', '.webp')
@@ -167,11 +171,13 @@ def main():
           f'[r2]{cover},gblur=sigma=18,eq=brightness=-0.14:saturation=0.8,drawbox=x=0:y=0:w=iw:h=ih:color=white@0.10:t=fill,format=rgba[fz]',
           '[4]format=gray[pm];[fz][pm]alphamerge[panel]',
           f'[r3]scale={cw}:{ch},format=rgba[rc];[6]format=gray[cm];[rc][cm]alphamerge[card]',
-          f"color=c={st['color'].replace('#', '0x')}:s={SQ}x{SQ}:r={fps},format=rgba[sc];[2]format=gray[sm];[sc][sm]alphamerge,scale={S}:{S}[stroke]",
+          f"color=c={st['color'].replace('#', '0x')}:s={SQ}x{SQ}:r={fps},format=rgba[sc];[2]format=gray,split[sm][shm];[sc][sm]alphamerge,scale={S}:{S}[stroke]",
+          f"color=c=black:s={SQ}x{SQ}:r={fps},format=rgba[shc];[shm]gblur=sigma=22[shb];[shc][shb]alphamerge,scale={S}:{S},colorchannelmixer=aa=0.5[shadow]",
           f'[0]format=rgba[s0];[1]format=gray[mm];[s0][mm]alphamerge,scale={S}:{S}[person]',
           '[bd][panel]overlay=0:0:shortest=1[a0];[a0][5]overlay=0:0:shortest=1[a1]',
           f'[a1][card]overlay={cx}:{cy}[a2]',
-          f'[a2][stroke]overlay={PX}:{PY}:shortest=1[a3];[a3][person]overlay={PX}:{PY}[a4]']
+          (f'[a2][shadow]overlay={PX + 6}:{PY + 16}:shortest=1[a2s];[a2s]' if L['shadow'] else '[a2][shadow]overlay=0:0:enable=0[a2s];[a2s]') +
+          f'[stroke]overlay={PX}:{PY}:shortest=1[a3];[a3][person]overlay={PX}:{PY}[a4]']
     fc.append('[a4][7]overlay=0:0,format=yuv420p[v]' if has_bar else '[a4]format=yuv420p[v]')
     cmd = ['ffmpeg', '-loglevel', 'error', '-y'] + inp
     if c.get('audio'): cmd += ['-i', f'{wd}/a.m4a']
@@ -184,9 +190,12 @@ def main():
     if c.get('orient', 'vertical') == 'vertical':
         info['subs_y'] = (cy + ch + L['panel'][1]) // 2          # 字幕落在卡片和面板之间，写进 vedl 那条 clip 的 "subs_y"
     else:
-        zx = (L['panel'][2] + W - 28) // 2; zy = (cy + ch + H) // 2   # 卡片下方、面板右侧的空区
-        info['subs_shift'] = [zx - W // 2, zy - 940]               # 写进 edl 那条 clip 的 "subs_shift"（subs.py 默认字幕中线 y=940）
-        info['subs_max_w'] = W - 28 - L['panel'][2] - 40
+        # 人右边缘以右、卡片下沿以下的空区；写进 edl 那条 clip 的 "subs_shift"（subs.py 默认字幕中线 y=940）
+        mb = Image.open(f'{wd}/st/s/{fs[len(fs) // 2]}').getbbox() or (0, 0, SQ, SQ)
+        x0 = PX + round(mb[2] * k) + 30; x1 = W - 40
+        zy = (cy + ch + H) // 2 if H - (cy + ch) >= 90 else H - 70
+        info['subs_shift'] = [(x0 + x1) // 2 - W // 2, zy - 940]
+        info['subs_max_w'] = x1 - x0
     print(json.dumps(info, ensure_ascii=False))
 
 

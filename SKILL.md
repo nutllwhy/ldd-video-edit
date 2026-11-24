@@ -66,7 +66,7 @@ Set `SK` to the root directory of this cloned skill repository before running co
 - VH — 1:1 split: landscape media above, square speaker crop below, captions near the seam
 - VK — cut-out: media card above, outlined speaker cut-out lower left on a frosted panel, optional chapter bar (`scripts/cutout_compose.py`)
 
-The landscape equivalent is K (media card upper right, cut-out lower left). See the cut-out section of `references/layouts.md`.
+The landscape equivalent is K (media card fills the frame below the chapter bar, cut-out overlaps its lower-left corner). See the cut-out section of `references/layouts.md`.
 
 Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; leave enough headroom in circular portraits.
 

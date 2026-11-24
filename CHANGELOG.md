@@ -1,7 +1,7 @@
 # Changelog
 
 ## v0.9 — Cut-out layouts and chapter bar
-- Added VK (vertical) and K (landscape) cut-out layouts: speaker matte via macOS Vision, smoothed sticker outline, frosted panel, rounded media card, automatic head-based placement (`scripts/cutout_compose.py`, `scripts/cutout/fg_mask.swift`).
+- Added VK (vertical) and K (landscape, media card dominant with the speaker overlapping it) cut-out layouts: speaker matte via macOS Vision, smoothed sticker outline, frosted panel, rounded media card, automatic head-based placement (`scripts/cutout_compose.py`, `scripts/cutout/fg_mask.swift`).
 - Added an opt-in top chapter bar with centred labels (`scripts/chapter_bar.py`); rules L9–L10 cover when to use them.
 - `assemble_vertical.py` accepts per-clip `subs_y`; `assemble.py` accepts per-clip `subs_shift` and no longer fails when an edit has no picture-in-picture clip.
 - Font lookup now goes through `scripts/cjkfont.py`; `fc-match 'sans:lang=zh'` could return a Latin-only font and render captions as boxes.
