@@ -15,6 +15,7 @@ edl.json (paths relative to <project>):
            "face_crop": "600:600:420:80", "ring": "#3A7D68" },
   "clips": [ {"name": "OPEN", "file": "animation/renders/intro.mp4", "start": 2.0, "mode": "cover"},
              {"name": "DETAIL", "file": "animation/renders/detail.mp4", "start": 10.0, "mode": "pip"},
+             {"name": "CUT", "file": "work/k-01.mp4", "start": 20.0, "mode": "cover", "subs_shift": [296, -96]},  # K cut-out (cutout_compose.py)
              {"name": "CLOSE", "file": "animation/renders/close.mp4", "start": 30.0, "mode": "end"} ]   # end = outro card, same as cover
 }
 
@@ -67,7 +68,8 @@ for i, c in enumerate(cl):
     nxt = cl[i + 1]['start'] if i + 1 < len(cl) else None
     # butt-joined clips (gap 0) also get a hold: float rounding at the seam otherwise lets one speaker frame through
     hold = max(0.0, nxt - (st + d_)) + 0.1 if nxt is not None and nxt - (st + d_) < SNAP else 0.0
-    clips.append(dict(n=c['name'], st=st, d=d_, hold=hold, end=st + d_ + hold, f=f, pip=c.get('mode') == 'pip'))
+    clips.append(dict(n=c['name'], st=st, d=d_, hold=hold, end=st + d_ + hold, f=f, pip=c.get('mode') == 'pip',
+                      shift=c.get('subs_shift')))
 
 groups = []
 for c in clips:
@@ -117,7 +119,15 @@ for j, g in enumerate(groups):
     fades = (f"fade=t=in:st=0:d={FADE}:alpha=1," if fin else '') + (f"fade=t=out:st={gd - FADE:.3f}:d={FADE}:alpha=1," if fout else '')
     fc.append(f"[{gc}][fm{j}]overlay={PX}:{PY}:eof_action=pass,{fades}setpts=PTS-STARTPTS+{g['st']}/TB[gg{j}]")
     fc.append(f"[{cur}][gg{j}]overlay=enable='between(t,{g['st']},{g['end'] - 0.001:.3f})':eof_action=pass[go{j}]"); cur = f'go{j}'
-fc.append(f"[{cur}][3:v]overlay=0:{e.get('subs_y', 840)}:eof_action=pass,format=yuv420p[vout]")
+if not groups:                        # no pip clip in this edit: the split plates still need a sink
+    fc.append('[pl0]nullsink;[cm0]nullsink;[ccm0]nullsink')
+# per-clip "subs_shift": [dx, dy] moves the subtitle strip while that clip plays (K cut-out shots: captions sit under the card)
+sx, sy = '0', str(e.get('subs_y', 840))
+for c in clips:
+    if c['shift']:
+        w_ = f"between(t,{c['st']},{c['end'] - 0.001:.3f})"
+        sx = f"if({w_},{c['shift'][0]},{sx})"; sy = f"if({w_},{e.get('subs_y', 840) + c['shift'][1]},{sy})"
+fc.append(f"[{cur}][3:v]overlay=x='{sx}':y='{sy}':eof_action=pass,format=yuv420p[vout]")
 fc.append(f'[1:a]aresample=48000,loudnorm=I=-16:TP=-1.5:LRA=11,apad,atrim=0:{T}[vo]')
 fc.append('[vo]asplit[vo1][vo2]')
 fc.append(f"[2:a]aresample=48000,atrim=0:{T},volume={e.get('bed_gain', 0.22)},afade=t=out:st={T - 2.5}:d=2.5[bed]")

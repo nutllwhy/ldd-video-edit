@@ -11,6 +11,7 @@ elif command -v chromium >/dev/null || command -v google-chrome >/dev/null || co
 else
   ok "Chromium browser" "MISSING (install Playwright Chromium or set CHROME)"
 fi
+if [ "$(uname)" = Darwin ]; then xcrun --find swiftc >/dev/null 2>&1 && ok "swiftc (cut-out layouts)" OK || ok "swiftc (cut-out layouts)" "MISSING (xcode-select --install)"; fi
 echo "fonts:"
 for f in "TsangerYuMo" "HanziPen SC" "Hannotate SC" "YouSheBiaoTiHei" "Source Han Sans CN" "PingFang SC"; do
   fc-list : family | grep -q "$f" && ok "$f" OK || ok "$f" "MISSING (style will fall back to a default font)"

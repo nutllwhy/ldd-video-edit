@@ -8,7 +8,7 @@ Use this checklist at style approval and after rendering. If a shot feels interc
 - Unrequested neon gradients, glowing outlines, and purple-to-blue backgrounds.
 - Building every frame from identical rounded cards or glass panels.
 - Leaving all shapes perfectly clean when the chosen medium should show paper, ink, halftone, pencil, chalk, or pixel texture.
-- Centering a generic title on a gradient, adding decorative rules, corner page numbers, chapter counters, progress bars, or using an automatic 50/50 split.
+- Centering a generic title on a gradient, adding decorative rules, corner page numbers, chapter counters, progress bars (the opt-in chapter bar in rules L10 is the only exception), or using an automatic 50/50 split.
 - Using fade-up for every entrance, typewriter reveals, jelly bounce, one easing curve throughout, or long shots where only elements appear one by one.
 
 ## Stronger choices

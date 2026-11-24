@@ -18,7 +18,8 @@ vedl.json (paths relative to <project>):
   "push":   [[19.2, 0.2, 1.06, 19.8]],   # optional punch-in on VA: [t, ramp, scale, until]
   "clips":  [ {"file": "anim/renders/shot-01.mp4", "start": 0,  "mode": "vs"},
               {"file": "anim/renders/shot-02.mp4", "start": 6, "mode": "vh"},     # 1080x840
-              {"file": "anim/renders/shot-04.mp4", "start": 19, "mode": "bare"} ]    # full screen, no avatar
+              {"file": "anim/renders/shot-04.mp4", "start": 19, "mode": "bare"},     # full screen, no avatar
+              {"file": "work/vk-01.mp4", "start": 22, "mode": "bare", "subs_y": 864} ]  # VK cut-out from cutout_compose.py
 }
 Clip duration = the file's duration (or "dur"). Anywhere no clip plays is VA.
 
@@ -40,10 +41,9 @@ SEAM = e.get('seam', 840)
 SUBY = e.get('subs_y', 1430)        # VA / bare subtitle centre line; raise it when MG shots need the lower third
 ab = lambda p: p if os.path.isabs(p) else os.path.join(P, p)
 dur = lambda f: float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
-FONT = os.environ.get('LDD_CJK_FONT', '')
-if not FONT:
-    try: FONT = subprocess.check_output(['fc-match', '-f', '%{file}', 'sans:lang=zh'], stderr=subprocess.DEVNULL, text=True).strip()
-    except (FileNotFoundError, subprocess.CalledProcessError): FONT = ''
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cjkfont
+FONT, FIDX = cjkfont.find()
 if not FONT or not os.path.exists(FONT): sys.exit('no CJK font found; install a CJK font or set LDD_CJK_FONT')
 
 clips = sorted(e['clips'], key=lambda c: c['start'])
@@ -65,9 +65,13 @@ def mode_at(t):
     for c in reversed(clips):          # latest clip wins: the previous clip's hold frame is only a bridge
         if c['start'] - 1e-3 <= t < c['end']: return c['mode']
     return 'va'
+def suby_at(t):                         # per-clip "subs_y" (e.g. VK cut-out shots keep captions off the face)
+    for c in reversed(clips):
+        if c['start'] - 1e-3 <= t < c['end']: return c.get('subs_y', SUBY)
+    return SUBY
 
 # ---- subtitles
-fbig, fsm = ImageFont.truetype(FONT, 66), ImageFont.truetype(FONT, 58)
+fbig, fsm = ImageFont.truetype(FONT, 66, index=FIDX), ImageFont.truetype(FONT, 58, index=FIDX)
 MAXW = 940 - (CXP + D + 26)
 def wrap(txt):
     if '/' in txt: return txt.split('/')
@@ -80,7 +84,8 @@ def wrap(txt):
         if best is None or score < best[0]: best = (score, k)
     k = best[1] if best else n // 2
     return [txt[:k]] + wrap(txt[k:])
-def render_cue(i, txt, m):
+def render_cue(i, txt, m, suby=None):
+    suby = SUBY if suby is None else suby
     big = m in ('va', 'vh', 'bare')
     f = fbig if big else fsm; lh = 84 if big else 78; st = 9
     lines = [txt.replace('/', '')] if big else wrap(txt)
@@ -91,7 +96,7 @@ def render_cue(i, txt, m):
         d.text((x, st + j * lh), l, font=f, fill='#FFFFFF', stroke_width=st, stroke_fill='#111111')
     fn = os.path.join(P, f'edit/vsubs/c{i:03d}.png'); im.save(fn)
     if m == 'vh': x, y = (W - lw) // 2, SEAM - im.height // 2
-    elif big: x, y = (W - lw) // 2, SUBY - im.height // 2
+    elif big: x, y = (W - lw) // 2, suby - im.height // 2
     else: x, y = CXP + D + 26, CYP + D // 2 - im.height // 2
     if lw > W - 80 or (not big and x + lw > 940): print(f'WARN cue {i} too wide ({lw}px): {txt}')
     return fn, x, y
@@ -139,7 +144,7 @@ if on:
     fc.append(f"[r1][fcirc]overlay={CXP}:{CYP}:enable='{on}'[r2]"); cur = 'r2'
 cues = json.load(open(ab(e['cues']))) if e.get('cues') else []
 for i, (a, b, txt) in enumerate(cues):
-    fn, x, y = render_cue(i, txt, mode_at(a + 0.01))
+    fn, x, y = render_cue(i, txt, mode_at(a + 0.01), suby_at(a + 0.01))
     inp += ['-i', fn]
     fc.append(f"[{cur}][{k}:v]overlay={x}:{y}:enable='between(t,{a:.3f},{b - 0.001:.3f})'[u{i}]"); cur = f'u{i}'; k += 1
 fc.append(f"[{cur}]format=yuv420p[vout]")

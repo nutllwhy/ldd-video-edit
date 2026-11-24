@@ -18,12 +18,11 @@ for lab, p in items:
 cols = 2; rows = 1 if len(ims) == 2 else 2
 W, H, G = 960, max(i.height for _, i in ims), 16
 sheet = Image.new('RGB', (cols * W + (cols + 1) * G, rows * H + (rows + 1) * G), (24, 24, 24))
-font_path = os.environ.get('LDD_CJK_FONT', '')
-if not font_path:
-    try: font_path = subprocess.run(['fc-match', '-f', '%{file}', 'sans:lang=zh'], capture_output=True, text=True, check=True).stdout.strip()
-    except (FileNotFoundError, subprocess.CalledProcessError): font_path = ''
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cjkfont
+font_path, font_idx = cjkfont.find()
 try:
-    f = ImageFont.truetype(font_path, 44) if font_path and os.path.isfile(font_path) else ImageFont.load_default()
+    f = ImageFont.truetype(font_path, 44, index=font_idx) if font_path and os.path.isfile(font_path) else ImageFont.load_default()
 except Exception:
     f = ImageFont.load_default()
 d = ImageDraw.Draw(sheet)

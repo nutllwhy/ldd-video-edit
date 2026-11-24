@@ -45,6 +45,7 @@ Set `SK` to the root directory of this cloned skill repository before running co
 | 6 | Make animation | Hand-drawn SK pipeline: `scripts/new_sketch.sh`; follow `references/sketch.md`. Paper-cut or dossier collage: `scripts/new_animation.sh`; follow `references/animation.md`. |
 | 7 | Prepare subtitles | `scripts/cues.py`; verify semantic line breaks and timing. |
 | 8 | Add music only if the approved plan calls for it | `scripts/bed.py` |
+| 8b | Cut-out shots (VK / K), if planned | `scripts/cutout_compose.py`; copy the printed `subs_y` / `subs_shift` into the edit list. macOS only. |
 | 9 | Assemble | Landscape: `scripts/assemble.py`; vertical: `scripts/assemble_vertical.py`. |
 | 10 | Validate | `scripts/plan_check.py`, `scripts/seam_check.py`, then inspect frames. Pass G3. |
 | 11 | Deliver | Versioned video, concise change notes, and any requested standalone animation clips. |
@@ -63,6 +64,9 @@ Set `SK` to the root directory of this cloned skill repository before running co
 - VA — speaker full frame
 - VS — full-frame vertical media with a small circular speaker portrait
 - VH — 1:1 split: landscape media above, square speaker crop below, captions near the seam
+- VK — cut-out: media card above, outlined speaker cut-out lower left on a frosted panel, optional chapter bar (`scripts/cutout_compose.py`)
+
+The landscape equivalent is K (media card upper right, cut-out lower left). See the cut-out section of `references/layouts.md`.
 
 Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; leave enough headroom in circular portraits.
 

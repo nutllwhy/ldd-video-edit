@@ -52,6 +52,8 @@ See `layouts.md` for dimensions and safe areas.
 | L6 | Vary framing or position across consecutive shots so a sequence does not become a static template. | Review three consecutive shots together. |
 | L7 | Do not place large text cards over a speaker's mouth when the spoken subject is the focus. | Inspect captions and graphic overlays against the face. |
 | L8 | Keep captions and important graphics inside the delivery format's safe areas. | Check all edges and platform interface zones. |
+| L9 | Cut-out layouts (VK / K) put the speaker in front of the media card, offset to one side, on a frosted panel; the speaker never covers the card's key content, and captions move into the free zone the script reports (`subs_y` / `subs_shift`). | Inspect the outline at 200% on hair, hands and held props; check captions do not touch the face or the card. |
+| L10 | A top chapter bar is an opt-in element for structured explainers with 3–5 chapters, never a default; equal-width segments, labels centred over their segment, the current segment highlighted. Do not combine it with page numbers or chapter counters. | Confirm the brief asked for it; check each switch time against the narration. |
 
 ## M · Source media and factual claims
 

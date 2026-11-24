@@ -16,12 +16,11 @@ for c in CANDS:
         try: font = ImageFont.truetype(c, SIZE, index=0); break
         except Exception: pass
 if font is None:
-    try:
-        out = subprocess.run(['fc-match', '-f', '%{file}', 'sans:lang=zh'], capture_output=True, text=True, check=True).stdout.strip()
-        if not out or not os.path.isfile(out): raise OSError('fontconfig did not return an installed CJK font')
-        font = ImageFont.truetype(out, SIZE)
-    except (FileNotFoundError, subprocess.CalledProcessError, OSError):
-        sys.exit('no CJK font found; install a CJK font or set LDD_CJK_FONT')
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import cjkfont                    # fc-match 'sans:lang=zh' can return a Latin-only font on macOS
+    fp, fi = cjkfont.find()
+    if not fp: sys.exit('no CJK font found; install a CJK font or set LDD_CJK_FONT')
+    font = ImageFont.truetype(fp, SIZE, index=fi)
 cues = json.load(open(os.path.join(P, 'work/cues.json')))
 d = os.path.join(P, 'work/subs'); os.makedirs(d, exist_ok=True)
 blank = os.path.join(d, 'blank.png'); Image.new('RGBA', (W, SH), (0, 0, 0, 0)).save(blank)
