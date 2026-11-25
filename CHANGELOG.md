@@ -6,6 +6,7 @@
 - New rules: sound effects stay sparse and below the voice; inserted clips are muted; generated images are never cropped to fit; the artifact outranks the face, with a small lower-left portrait; crop small portraits tighter; keep hand-drawn treatments for accent captions only; do not re-annotate a frame that already carries marks; ask before speeding up a mismatched clip; limiter last in the chain.
 - Added a revision section: versioned exports, cuts on the assembled timeline with short audio fades, corrections applied everywhere the problem occurs, contact-sheet checks with an honest statement of coverage.
 - Added `references/troubleshooting.md`: segmented and background rendering, current ffmpeg filter-script syntax, zsh argument splitting, install and download failures, CJK font boxes.
+- Clarified portrait framing: every portrait is cropped tight and centred, large or small; the lower half of a split is the only framing that keeps space above the head, for the captions.
 
 ## v0.9 — Cut-out layouts and chapter bar
 - Added VK (vertical) and K (landscape, media card dominant with the speaker overlapping it) cut-out layouts: speaker matte via macOS Vision, smoothed sticker outline, frosted panel, rounded media card, automatic head-based placement (`scripts/cutout_compose.py`, `scripts/cutout/fg_mask.swift`).

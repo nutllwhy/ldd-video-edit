@@ -80,7 +80,7 @@ Splits (VH) are for interface captures only; never split a plain image or produc
 
 The landscape equivalent is K (media card fills the frame below the chapter bar, cut-out overlaps its lower-left corner). See the cut-out section of `references/layouts.md`.
 
-Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; leave enough headroom in circular portraits (a small portrait cropped out of a wider frame follows L14).
+Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; Crop portraits tight and centred with little headroom (L14); the only place that keeps space above the head is the lower half of a split, because the captions go there.
 
 ## Style selection
 

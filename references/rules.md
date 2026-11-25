@@ -49,7 +49,7 @@ See `layouts.md` for dimensions and safe areas.
 | L1 | Use a small, explicit set of layout codes in the edit plan; choose the layout based on whether the speaker, an artifact, or an animated idea is the focal point. | Every planned shot has a layout code. |
 | L2 | Vertical media can fill a 9:16 frame; keep captions clear of the speaker portrait and interface-safe areas. | Inspect the portrait and captions at phone size. |
 | L3 | For landscape media inside a vertical video, use a deliberate split or crop; do not leave accidental empty bars. | Inspect the frame at delivery size. |
-| L4 | Keep circular portraits centered with headroom and shoulders visible where possible (for the small portrait of a demo-style edit see L14). | Enlarge several frames from each portrait section. |
+| L4 | Crop every portrait toward the centre of the face, with only a little headroom (L14). One exception only: the lower half of a split layout keeps space above the head because the captions sit there (L13). The cut-out layouts crop down to the chest instead and are not affected. | Enlarge several frames from each portrait section. |
 | L5 | Use hard cuts between distinct layouts unless a transition is approved and motivated. | Inspect every layout boundary. |
 | L6 | Vary framing or position across consecutive shots so a sequence does not become a static template. | Review three consecutive shots together. |
 | L7 | Do not place large text cards over a speaker's mouth when the spoken subject is the focus. | Inspect captions and graphic overlays against the face. |
@@ -59,7 +59,7 @@ See `layouts.md` for dimensions and safe areas.
 | L11 | Present generated images and effect outputs whole. Never crop them to fill a ratio or to fit a layout — the cropped edge is often the exact thing being shown. Change the layout or add a matte instead. | Compare the displayed area with the source image; confirm no edge content is lost. |
 | L12 | In a demo-style edit the artifact is the subject: show the effect before the person, and bring the speaker in only where the narration is personal — as a small portrait in the lower-left corner. Reserve full-frame speaker shots for emphasis and the closing line. | Measure how much runtime the speaker is visible; check the artifact is never shrunk to make room for a large face. |
 | L13 | Reserve the split layout for interface captures (screen recordings, web pages, app UI). Do not split a plain generated image or a product still. | List every split shot and name the interface it shows. |
-| L14 | When a face has to be cropped out of a wider frame for a small portrait, crop toward the centre: more face, only a little headroom. Empty space above the head is wasted inside a small circle. | Inspect the portrait at phone size; the face should read at a glance. |
+| L14 | Take a portrait by framing the face tight and centred — more face, little headroom — whatever the size of the portrait. Large or small, empty space above the head helps nothing; it only shrinks the face. | Inspect the portrait at phone size; the face should read at a glance. |
 
 ## M · Source media and factual claims
 
