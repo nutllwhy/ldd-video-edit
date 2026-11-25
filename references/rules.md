@@ -18,8 +18,10 @@ Before each edit, review the relevant rules below. At delivery, verify them agai
 | S1 | Preserve the approved narration and delivery. Only remove stumbles, repeated takes, or clear mistakes; do not reorder sentences or change speed without approval. Re-transcribe after cuts. | List every removed range in delivery notes; compare transcript to the final audio. |
 | S2 | Let the final spoken phrase finish. Fade music independently; avoid cutting speech at the end. | Listen to the final three seconds. |
 | S3 | State whether music is included in the G1 plan and obtain approval before generating or adding it. | Confirm the plan records music: yes/no. |
-| S4 | Keep voice loudness consistent; target approximately -16 LUFS integrated and no higher than -1 dBFS true peak unless the delivery spec says otherwise. | Measure with `ffmpeg` loudness analysis. |
+| S4 | Keep voice loudness consistent; target approximately -16 LUFS integrated and no higher than -1 dBFS true peak unless the delivery spec says otherwise, and put a limiter last in the chain. | Measure with `ffmpeg` loudness analysis. |
 | S5 | Maintain a transcript correction table. Verify names, product terms, and foreign-language phrases before using them in captions or graphics. | Review corrected text against the approved script and audio. |
+| S6 | Keep sound effects sparse: roughly one every 15–20 seconds in a short explainer is already a lot, and one signature accent (a single reveal chime) per film. Do not attach an effect to every graphic that appears. | Count effect cues in the edit list; listen once with the voice muted, then together. |
+| S7 | Inserted material clips, screen recordings, and b-roll carry no audio — mute them instead of pulling the voice down to match. | Check every imported clip's audio state in the edit list. |
 
 ## H · Opening and ending
 
@@ -47,13 +49,17 @@ See `layouts.md` for dimensions and safe areas.
 | L1 | Use a small, explicit set of layout codes in the edit plan; choose the layout based on whether the speaker, an artifact, or an animated idea is the focal point. | Every planned shot has a layout code. |
 | L2 | Vertical media can fill a 9:16 frame; keep captions clear of the speaker portrait and interface-safe areas. | Inspect the portrait and captions at phone size. |
 | L3 | For landscape media inside a vertical video, use a deliberate split or crop; do not leave accidental empty bars. | Inspect the frame at delivery size. |
-| L4 | Keep circular portraits centered with headroom and shoulders visible where possible. | Enlarge several frames from each portrait section. |
+| L4 | Keep circular portraits centered with headroom and shoulders visible where possible (for the small portrait of a demo-style edit see L14). | Enlarge several frames from each portrait section. |
 | L5 | Use hard cuts between distinct layouts unless a transition is approved and motivated. | Inspect every layout boundary. |
 | L6 | Vary framing or position across consecutive shots so a sequence does not become a static template. | Review three consecutive shots together. |
 | L7 | Do not place large text cards over a speaker's mouth when the spoken subject is the focus. | Inspect captions and graphic overlays against the face. |
 | L8 | Keep captions and important graphics inside the delivery format's safe areas. | Check all edges and platform interface zones. |
 | L9 | Cut-out layouts (VK / K) put the speaker in front of the media card, offset to one side, on a frosted panel; the speaker never covers the card's key content, and captions move into the free zone the script reports (`subs_y` / `subs_shift`). | Inspect the outline at 200% on hair, hands and held props; check captions do not touch the face or the card. |
 | L10 | A top chapter bar is an opt-in element for structured explainers with 3–5 chapters, never a default; equal-width segments, labels centred over their segment, the current segment highlighted. Do not combine it with page numbers or chapter counters. | Confirm the brief asked for it; check each switch time against the narration. |
+| L11 | Present generated images and effect outputs whole. Never crop them to fill a ratio or to fit a layout — the cropped edge is often the exact thing being shown. Change the layout or add a matte instead. | Compare the displayed area with the source image; confirm no edge content is lost. |
+| L12 | In a demo-style edit the artifact is the subject: show the effect before the person, and bring the speaker in only where the narration is personal — as a small portrait in the lower-left corner. Reserve full-frame speaker shots for emphasis and the closing line. | Measure how much runtime the speaker is visible; check the artifact is never shrunk to make room for a large face. |
+| L13 | Reserve the split layout for interface captures (screen recordings, web pages, app UI). Do not split a plain generated image or a product still. | List every split shot and name the interface it shows. |
+| L14 | When a face has to be cropped out of a wider frame for a small portrait, crop toward the centre: more face, only a little headroom. Empty space above the head is wasted inside a small circle. | Inspect the portrait at phone size; the face should read at a glance. |
 
 ## M · Source media and factual claims
 
@@ -83,6 +89,8 @@ See `layouts.md` for dimensions and safe areas.
 | A9 | For hand-drawn scenes, use the SK pipeline and show a representative frame before scaling production. | Check paper/line texture, motion, and restrained accent use. |
 | A10 | Draw characters symbolically in the same medium as the scene. The shared stick-figure rig is a default, not a limit; simple vector characters are acceptable when stylistically consistent. Avoid photorealistic likenesses and raster characters with separately programmed limbs. | Inspect line, fill, texture, and character-to-prop contact in rendered frames. |
 | A11 | Make shoulders, elbows, and resting poses readable. Do not let the upper arm merge with the torso or the forearm cross the waist without a clear action. | Run `scripts/arm_pose_check.mjs`, then inspect key poses and transitions visually. |
+| A12 | In a footage-led edit (real product images, recordings, generated stills), keep backgrounds, cards, and captions in a restrained, designed register; reserve hand-drawn or cartoon treatments for short accent captions. A notebook doodle across the whole frame reads as a different genre. | Compare a rendered frame with the approved style sample; ask whether the type, card, and background look designed or drawn. |
+| A13 | Do not add annotations of your own (circles, arrows, labels) on top of a source frame that already carries marks. Reuse the existing marks or pick a clean frame. | Inspect each source frame for pre-existing annotations before drawing anything. |
 
 ## E · Assembly and captions
 
@@ -92,6 +100,8 @@ See `layouts.md` for dimensions and safe areas.
 | E2 | Inspect frame differences around each cut; multiple consecutive isolated flashes indicate a seam problem. | Run `scripts/seam_check.py` and review flagged frames. |
 | E3 | Break captions by meaning and keep line length appropriate to the frame size. | Inspect at phone size and listen against the narration. |
 | E4 | Save each revision under a new versioned filename; do not overwrite the previous deliverable. | Confirm versions exist in the project folder. |
+| E5 | Captions follow the layout that is on screen. When one spoken sentence crosses a layout change, split the cue at the cut so each part sits in the new layout's caption zone. A cue positioned once from the layout at its start will end up over a face. | Check every cue that spans a layout boundary against the frame at that moment. |
+| E6 | When a source clip is much longer or shorter than its line (e.g. 9.6 s of recording for 3.1 s of narration), do not silently speed it up. Offer three options — extend the shot, use only the best segment, accept the speed change — and wait for the decision. | List mismatched clips with both durations in the plan. |
 
 ## D · Delivery
 

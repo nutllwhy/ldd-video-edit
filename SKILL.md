@@ -37,7 +37,7 @@ Set `SK` to the root directory of this cloned skill repository before running co
 | Step | Work | Output / reference |
 |---|---|---|
 | 0 | Check dependencies | `scripts/check_env.sh` |
-| 1 | Inventory media | `work/assets.md`: resolution, duration, aspect ratio, burned-in captions, sensitive content, and intended use. See `references/materials.md`. |
+| 1 | Inventory media | `work/assets.md`: resolution, duration, aspect ratio, burned-in captions, sensitive content, and intended use. Re-check the folder before each revision pass — files are often added mid-project. See `references/materials.md`. |
 | 2 | Transcribe and prepare speaker footage | `scripts/prep.sh` for landscape; `scripts/vertical_prep.sh` for vertical. |
 | 3 | Correct transcript | Maintain a correction table and verify names, product terms, and English phrases before using them on screen. |
 | 4 | Build the shot plan | `plan.md`: time, spoken line, layout, visual medium, on-screen content, and source for factual claims. Pass G1. |
@@ -49,6 +49,13 @@ Set `SK` to the root directory of this cloned skill repository before running co
 | 9 | Assemble | Landscape: `scripts/assemble.py`; vertical: `scripts/assemble_vertical.py`. |
 | 10 | Validate | `scripts/plan_check.py`, `scripts/seam_check.py`, then inspect frames. Pass G3. |
 | 11 | Deliver | Versioned video, concise change notes, and any requested standalone animation clips. |
+
+## Revisions
+
+- Each round produces a new file (`v1`, `v2`, …); never overwrite the previous export.
+- Cut on the assembled timeline so picture, captions, and effects move together. Choose cut points in the silence on either side of the removed line and add a short (~20 ms) audio fade at each join to avoid a click.
+- Apply a correction everywhere the same problem occurs, not only at the timestamp that was pointed at. Fixing one face-covered caption but leaving the other split shots means another round.
+- After each change, pull frames from the changed sections and from every layout boundary, and tile them into one contact sheet. State plainly in the delivery note which parts were checked this way and that the whole film was not watched second by second.
 
 ## Layout quick reference
 
@@ -63,12 +70,17 @@ Set `SK` to the root directory of this cloned skill repository before running co
 
 - VA — speaker full frame
 - VS — full-frame vertical media with a small circular speaker portrait
+- VG — generated image shown whole, centred on a frosted copy of itself (default for demo-style edits)
+- VC — full-bleed video with a small reference card lower left, no portrait
+- VQ — 2×2 grid for an opening guess-the-shot sequence
 - VH — 1:1 split: landscape media above, square speaker crop below, captions near the seam
 - VK — cut-out: media card above, outlined speaker cut-out lower left on a frosted panel, optional chapter bar (`scripts/cutout_compose.py`)
 
+Splits (VH) are for interface captures only; never split a plain image or product still.
+
 The landscape equivalent is K (media card fills the frame below the chapter bar, cut-out overlaps its lower-left corner). See the cut-out section of `references/layouts.md`.
 
-Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; leave enough headroom in circular portraits.
+Use hard cuts between layout types unless the approved plan specifies an exception. Keep faces, captions, and important information inside safe areas; leave enough headroom in circular portraits (a small portrait cropped out of a wider frame follows L14).
 
 ## Style selection
 
@@ -89,4 +101,5 @@ Generalize reusable lessons into `references/rules.md` and document implementati
 - `references/sketch-styles.md` — style gallery and SK presets
 - `references/sketch.md` — SK pipeline, character motion, and checks
 - `references/house-style.md`, `animation.md`, `motion.md`, `anti-ai-look.md`, `styles.md` — animation approaches
+- `references/troubleshooting.md` — render, ffmpeg, dependency, and network failures
 - `CREDITS.md` — source projects and license notes
